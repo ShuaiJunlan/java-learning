@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 使Autowired注解生效 -->
+    <!--<bean class ="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>-->
+    <!-- com.sh.hello.HelloWorld -->
+    <bean id="helloBean" class="com.sh.hello.HelloWorld">
+        <property name="name">
+            <value>suaijunlan</value>
+        </property>
+    </bean>
+    <bean id="helloBean1" class="com.sh.hello.HelloWorld" p:name="shuaijunlan   fff">
+
+    </bean>
+
+    <!-- com.sh.hello.Customer -->
+    <bean id="CustomerBean" class="com.sh.hello.Customer">
+        <property name="person" ref="PersonBean"></property>
+    </bean>
+    <bean id="PersonBean" class="com.sh.hello.Person">
+        <property name="name" value="shuaijunlan"></property>
+        <property name="address" value="hubeisheng-wuhanshi"></property>
+        <property name="age" value="15"></property>
+    </bean>
+
+    <bean id="CustomerBean1" class="com.sh.hello.Customer">
+        <property name="person">
+            <bean class="com.sh.hello.Person">
+                <property name="address" value="湖北省武汉市"></property>
+                <property name="age" value="20"></property>
+                <property name="name" value="帅俊岚"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="CustomerBean3" class="com.sh.hello.Customer">
+        <constructor-arg>
+            <bean class="com.sh.hello.Person">
+                <property name="name" value="shiyanlou" />
+                <property name="address" value="chengdu" />
+                <property name="age" value="25" />
+            </bean>
+        </constructor-arg>
+    </bean>
+
+
+</beans>

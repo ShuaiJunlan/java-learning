@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+<!-- 激活注解、管理注解的生命周z期 -->
+    <context:annotation-config/>
+
+    <!-- DispatcherServlet上下文， 只搜索@Controller标注的类， 不搜索其他标注的类 -->
+    <context:component-scan base-package="com.sh.mvcdemo">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <mvc:annotation-driven/>
+    <!-- 静态资源处理， css， js， imgs -->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    
+    <!-- 注册拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/courses/save"/>
+            <bean class="com.sh.mvcdemo.interceptor.Test1Interceptor"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1"/>
+        <property name="defaultViews">
+            <list>
+                <!-- JSON View -->
+                <bean
+                        class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsps/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- maxUploadSize表示上传文件大小的最大限制，单位为byte，resolveLazily属性启用是为了推迟文件解析，以便捕获文件大小异常-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="209715200"></property>
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="resolveLazily" value="true"></property>
+    </bean>
+
+</beans>

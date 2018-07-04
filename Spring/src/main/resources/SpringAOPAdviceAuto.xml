@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="customerSvr" class="com.sh.services.CustomerSvr">
+        <property name="name" value="shuaijunlan"></property>
+        <property name="url" value="www.shuaijunlan.cn"></property>
+    </bean>
+
+    <bean id="hijackAroundMethodBean" class="com.sh.spring.aop.advice.HijackAroundMethod"></bean>
+    <!--<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">-->
+        <!--<property name="beanNames">-->
+            <!--<list>-->
+                <!--<value>*Svr</value>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="interceptorNames">-->
+            <!--<list>-->
+                <!--<value>customerAdvisor</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; 利用 BeanNameAutoProxyCreator 自动创建 proxy &ndash;&gt;-->
+    <!--<bean id="customerAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">-->
+        <!--<property name="mappedName" value="printName"></property>-->
+        <!--<property name="advice" ref="hijackAroundMethodBean"></property>-->
+    <!--</bean>-->
+
+    <!-- 利用 DefaultAdvisorAutoProxyCreator 创建 Proxy -->
+    <bean id="customerAdvisor1" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="mappedName" value="printURL"></property>
+        <property name="advice" ref="hijackAroundMethodBean"></property>
+    </bean>
+
+    <bean class = "org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>
+</beans>
