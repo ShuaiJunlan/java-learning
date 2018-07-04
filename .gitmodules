@@ -1,0 +1,3 @@
+[submodule "nkaptcha"]
+	path = nkaptcha
+	uri = git@github.com:shuaijunlan/nkaptcha.git
