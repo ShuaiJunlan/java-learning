@@ -18,7 +18,7 @@ public class TestDaemon {
             }
         });
         // default false
-        thread.setDaemon(false);
+//        thread.setDaemon(false);
         thread.start();
     }
     public static void main(String[] args) {
@@ -32,7 +32,7 @@ public class TestDaemon {
             }
         });
         // default false
-        thread.setDaemon(false);
+//        thread.setDaemon(false);
         thread.start();
 
     }
