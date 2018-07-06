@@ -9,6 +9,7 @@ import org.junit.Test;
 public class TestDaemon {
     @Test
     public void test() {
+        // Thread.currentThread().setDaemon(true); //java.lang.IllegalThreadStateException
         System.out.println(Thread.currentThread().isDaemon());
         Thread thread = new Thread(() -> {
             try {
