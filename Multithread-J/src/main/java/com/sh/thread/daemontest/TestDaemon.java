@@ -9,6 +9,7 @@ import org.junit.Test;
 public class TestDaemon {
     @Test
     public void test() {
+        System.out.println(Thread.currentThread().isDaemon());
         Thread thread = new Thread(() -> {
             try {
                 Thread.sleep(1000);
@@ -22,6 +23,7 @@ public class TestDaemon {
         thread.start();
     }
     public static void main(String[] args) {
+        System.out.println(Thread.currentThread().isDaemon());
 
         Thread thread = new Thread(() -> {
             try {
@@ -32,7 +34,7 @@ public class TestDaemon {
             }
         });
         // default false
-//        thread.setDaemon(false);
+        thread.setDaemon(false);
         thread.start();
 
     }
