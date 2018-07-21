@@ -2,6 +2,9 @@ package cn.shuaijunlan.netty.example;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
+import io.netty.channel.epoll.Epoll;
+import io.netty.channel.epoll.EpollEventLoopGroup;
+import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -15,11 +18,11 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
  */
 public class NettyServer {
     public void start(Integer port) throws InterruptedException {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workGroup = new NioEventLoopGroup(4);
+        EventLoopGroup bossGroup = Epoll.isAvailable() ? new EpollEventLoopGroup() : new NioEventLoopGroup();
+        EventLoopGroup workGroup = Epoll.isAvailable() ? new EpollEventLoopGroup(4) : new NioEventLoopGroup(4);
 
         ServerBootstrap bootstrap = new ServerBootstrap();
-        bootstrap.group(bossGroup, workGroup).channel(NioServerSocketChannel.class)
+        bootstrap.group(bossGroup, workGroup).channel(Epoll.isAvailable() ? EpollServerSocketChannel.class : NioServerSocketChannel.class)
                 .localAddress(port)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
@@ -32,13 +35,17 @@ public class NettyServer {
                                     @Override
                                     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
                                         System.out.println("Receive message:" + msg);
-                                        ctx.writeAndFlush("Hello " + msg);
+                                        // send ten times msg
+                                        for(int i = 0; i < 10; i++){
+                                            ctx.writeAndFlush("Hello " + msg);
+                                        }
                                     }
                                 });
                     }
                 });
         ChannelFuture channelFuture = bootstrap.bind().sync();
         channelFuture.channel().closeFuture().sync();
+
         bossGroup.shutdownGracefully().sync();
         workGroup.shutdownGracefully().sync();
     }
