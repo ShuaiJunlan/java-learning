@@ -1,4 +1,4 @@
-package cn.shuaijunlan.str;
+package cn.shuaijunlan.java.basic.learning.str;
 
 /**
  * @author Junlan Shuai[shuaijunlan@gmail.com].

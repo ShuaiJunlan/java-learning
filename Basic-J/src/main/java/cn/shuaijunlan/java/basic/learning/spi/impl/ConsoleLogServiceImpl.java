@@ -1,6 +1,6 @@
-package cn.shuaijunlan.spi.impl;
+package cn.shuaijunlan.java.basic.learning.spi.impl;
 
-import cn.shuaijunlan.spi.ILogService;
+import cn.shuaijunlan.java.basic.learning.spi.ILogService;
 
 /**
  * @author Junlan Shuai[shuaijunlan@gmail.com].

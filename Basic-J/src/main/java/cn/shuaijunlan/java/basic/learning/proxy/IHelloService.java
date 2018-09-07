@@ -1,4 +1,4 @@
-package cn.shuaijunlan.proxy;
+package cn.shuaijunlan.java.basic.learning.proxy;
 
 /**
  * @author Junlan Shuai[shuaijunlan@gmail.com].

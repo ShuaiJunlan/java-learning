@@ -1,4 +1,4 @@
-package cn.shuaijunlan.spi;
+package cn.shuaijunlan.java.basic.learning.spi;
 
 import java.util.Iterator;
 import java.util.ServiceLoader;
