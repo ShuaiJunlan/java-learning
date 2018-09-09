@@ -2,11 +2,9 @@ package cn.shuaijunlan.java.basic.learning.multithread.joinresult;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.locks.Condition;
 
 /**
  * @author Junlan Shuai[shuaijunlan@gmail.com].
@@ -131,9 +129,14 @@ public class JoinResultDemoTest {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         List<CompletableFuture<String>> completableFutures = new ArrayList<>();
         // final List<Integer> taskList = Lists
+        // HashSet
     }
 
 }
+
+/**
+ * CallableTask
+ */
 class CallableTask implements Callable<Integer>{
     private Integer i;
     public CallableTask(Integer i){
