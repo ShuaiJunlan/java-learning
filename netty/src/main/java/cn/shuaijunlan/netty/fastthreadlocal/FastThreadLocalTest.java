@@ -30,6 +30,23 @@ public class FastThreadLocalTest {
         System.out.println(threadLocal1.get());
         System.out.println(threadLocal2.get());
 
-        FastThreadLocalThread threadLocalThread = new FastThreadLocalThread();
+
+    }
+    @Test
+    public void test2() throws InterruptedException {
+        Runnable runnable = () -> {
+            FastThreadLocal.removeAll();
+            FastThreadLocal<Integer> local1 = new FastThreadLocal<>();
+            FastThreadLocal<Integer> local2 = new FastThreadLocal<>();
+            local1.set(1);
+            local2.set(2);
+            System.out.println(local1.get());
+            System.out.println(local2.get());
+        };
+
+        FastThreadLocalThread threadLocalThread = new FastThreadLocalThread(runnable);
+        threadLocalThread.start();
+        threadLocalThread.join();
+
     }
 }
