@@ -18,7 +18,7 @@ public class FastThreadLocalTest {
         FastThreadLocal<Integer> local1 = new FastThreadLocal<>();
         FastThreadLocal<Integer> local2 = new FastThreadLocal<>();
         local1.set(1);
-        local1.set(2);
+        local2.set(2);
         System.out.println(local1.get());
         System.out.println(local2.get());
 
