@@ -14,4 +14,10 @@ public class IntegerCacheTest {
         Integer c = 300, d = 300;
         System.out.println(c == d);
     }
+    @Test
+    public void test2(){
+        Integer a = new Integer(1);
+        Integer b = new Integer(1);
+        System.out.println(a == b);
+    }
 }
