@@ -36,11 +36,11 @@ public class TryCatchTest {
      * others, the value will be returned in catch block.
      */
     @Test
-    public void test(){
-        System.out.println(getVaule());
+    public void test2(){
+        System.out.println(getValue());
     }
 
-    public int getVaule(){
+    public int getValue(){
         try {
             int b = 1 / 0;
             return 1;
@@ -48,6 +48,41 @@ public class TryCatchTest {
             return 2;
         }finally {
             return 3;
+        }
+    }
+
+    @Test
+    public void test3(){
+        System.out.println(getValueWhenException());
+        System.out.println(getValueWhenException1());
+    }
+
+    /**
+     * When it occurs exception or not, the return statement in the finally block will be executed;
+     * @return value
+     */
+    private int getValueWhenException(){
+        try {
+            int i = 1 / 0;
+            return 1;
+        }catch (Exception e){
+            return 2;
+        }finally {
+            return 3;
+        }
+    }
+
+    /**
+     * If there is not finally block, when getting exception, the return statement in the catch block will be executed,
+     * otherwise the return statement in the try block will be executed.
+     * @return value
+     */
+    private int getValueWhenException1(){
+        try {
+            int i = 1 / 0;
+            return 1;
+        }catch (Exception e){
+            return 2;
         }
     }
 }
