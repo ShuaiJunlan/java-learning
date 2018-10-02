@@ -29,7 +29,7 @@ public class BlockQueueTest {
                 e.printStackTrace();
             }
         }).start();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
 
 
     }
