@@ -18,7 +18,7 @@ public class DoubleTest {
     }
 
     /**
-     * return true.
+     * return true. why?
      */
     @Test
     public void test2(){
@@ -35,5 +35,13 @@ public class DoubleTest {
         double c = 0.0000000000000000000100000000000001;
         double d = 0.0000000000000000000100000000000002;
         System.out.println(d == c);
+    }
+
+    /**
+     * How to compare two {@link Double}double type values?
+     */
+    @Test
+    public void test4(){
+
     }
 }
