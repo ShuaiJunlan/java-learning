@@ -38,7 +38,7 @@ public class DoubleTest {
     }
 
     /**
-     * How to compare two {@link Double}double type values?
+     * How to compare two {@link Double} double type values?
      */
     @Test
     public void test4(){
