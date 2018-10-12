@@ -24,5 +24,17 @@ public class ExecuteServiceTest {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Hello Runnable");
+            }
+        };
+        Callable<Integer> callable = new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                return 1;
+            }
+        };
     }
 }
