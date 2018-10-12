@@ -1,4 +1,4 @@
-package cn.shuaijunlan.java.basic.learning.floattype;
+package cn.shuaijunlan.java.basic.learning.basicdatatype.floattype;
 
 import org.junit.Test;
 
