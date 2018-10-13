@@ -2,8 +2,7 @@ package cn.shuaijunlan.java.basic.learning.threadpool;
 
 import org.junit.Test;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @author Junlan Shuaijunlan[shuaijunlan@gmail.com].
@@ -15,5 +14,6 @@ public class ExecutorsTest {
         Executor executor = Executors.newSingleThreadExecutor();
         Executor executor1 = Executors.newFixedThreadPool(3);
         Executor executor2 = Executors.newCachedThreadPool();
+        ThreadPoolExecutor executor3 = new ThreadPoolExecutor(1, 3, 1000, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<>());
     }
 }
