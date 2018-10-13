@@ -1,6 +1,5 @@
 package cn.shuaijunlan.java.basic.learning.threadpool;
 
-import com.sun.istack.internal.NotNull;
 import org.junit.Test;
 
 import java.util.concurrent.Executor;
