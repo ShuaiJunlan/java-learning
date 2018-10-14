@@ -1,4 +1,4 @@
-package cn.shuaijunlan.java.basic.learning.reentrantlock;
+package cn.shuaijunlan.java.basic.learning.lock.reentrantlock;
 
 import org.junit.Test;
 
@@ -10,15 +10,6 @@ public class BlockQueueTest {
     @Test
     public void test1() throws InterruptedException {
         BlockQueueWithSignal<Integer> blockQueueWithSignal = new BlockQueueWithSignal<>();
-        new Thread(() -> {
-            for (int i = 0; i < 17; i++){
-                try {
-                    blockQueueWithSignal.put(i);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
 
         new Thread(() -> {
             try {
@@ -27,6 +18,16 @@ public class BlockQueueTest {
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+        }).start();
+
+        new Thread(() -> {
+            for (int i = 0; i < 17; i++){
+                try {
+                    blockQueueWithSignal.put(i);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
         Thread.sleep(1000);

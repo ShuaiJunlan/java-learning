@@ -1,4 +1,4 @@
-package cn.shuaijunlan.java.basic.learning.reentrantlock;
+package cn.shuaijunlan.java.basic.learning.lock.reentrantlock;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
