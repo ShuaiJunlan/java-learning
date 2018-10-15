@@ -55,6 +55,7 @@ public class TryCatchTest {
     public void test3(){
         System.out.println(getValueWhenException());
         System.out.println(getValueWhenException1());
+        System.out.println(getValue1());
     }
 
     /**
@@ -84,5 +85,21 @@ public class TryCatchTest {
         }catch (Exception e){
             return 2;
         }
+    }
+
+    /**
+     * What is the return value?
+     * @return value
+     */
+    private int getValue1(){
+        int x = 1;
+        try {
+            return ++x;
+        }catch (Exception e){
+
+        }finally {
+            ++x;
+        }
+        return x;
     }
 }
