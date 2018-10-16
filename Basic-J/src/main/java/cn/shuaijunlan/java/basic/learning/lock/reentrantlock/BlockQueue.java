@@ -17,17 +17,18 @@ import java.util.concurrent.locks.ReentrantLock;
  * and providing take() and put() methods.
  *
  *
- * Why not it is thread security?
+ * Why not it is thread safe?
  * Answer: Assuming that there are two consumer threads A and B, when the queue is empty,
  * the two consumer threads have to wait until the queue is not empty. After that, one provider thread
- * puts a value into the queue and calling empty.notifyAll(), so the two waited consumer threads were awoke,
+ * puts a value into the queue and calling {@link Condition#notifyAll()}, so the two waited consumer threads were awoke,
  * so they execute the remaining code simultaneously, resulting in the count less than zero.
  */
 @Slf4j
 @NotThreadSafe
-public class BlockQueueWithCondition<T> {
+public class BlockQueue<T> {
 
     private ReentrantLock lock = new ReentrantLock();
+
     private Condition full = lock.newCondition();
     private Condition empty = lock.newCondition();
 
@@ -38,11 +39,11 @@ public class BlockQueueWithCondition<T> {
 
     private Object[] value;
 
-    public BlockQueueWithCondition(){
+    public BlockQueue(){
         value = new Object[maxLength];
     }
 
-    public BlockQueueWithCondition(Integer maxLength){
+    public BlockQueue(Integer maxLength){
         this.maxLength = maxLength;
         value = new Object[maxLength];
     }
@@ -57,7 +58,7 @@ public class BlockQueueWithCondition<T> {
             putIndex = putIndex % maxLength;
             value[putIndex++] = val;
             count++;
-            empty.signalAll();
+            empty.signal();
         }finally {
             lock.unlock();
         }
@@ -78,7 +79,7 @@ public class BlockQueueWithCondition<T> {
                 log.info("count: {}", count);
                 System.exit(1);
             }
-            full.signalAll();
+            full.signal();
         }finally {
            lock.unlock();
         }
