@@ -2,6 +2,7 @@ package cn.shuaijunlan.java.basic.learning.lock.reentrantlock;
 
 import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.NotThreadSafe;
+import net.jcip.annotations.ThreadSafe;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -11,21 +12,10 @@ import java.util.concurrent.locks.ReentrantLock;
  * @date Created on 7:43 PM 2018/10/02.
  * The class will achieve an blocking queue basing on {@link ReentrantLock} and {@link Condition},
  *
- * 2018-10-16 16:04:07 INFO  cn.shuaijunlan.java.basic.learning.lock.reentrantlock.BlockQueueWithCondition     - count: -1202168
- * 2018-10-16 16:04:07 INFO  cn.shuaijunlan.java.basic.learning.lock.reentrantlock.BlockQueueTest     - 991
- * 2018-10-16 16:04:07 INFO  cn.shuaijunlan.java.basic.learning.lock.reentrantlock.BlockQueueWithCondition     - count: -1202169
- * and providing take() and put() methods.
- *
- *
- * Why not it is thread safe?
- * Answer: Assuming that there are two consumer threads A and B, when the queue is empty,
- * the two consumer threads have to wait until the queue is not empty. After that, one provider thread
- * puts a value into the queue and calling {@link Condition#notifyAll()}, so the two waited consumer threads were awoke,
- * so they execute the remaining code simultaneously, resulting in the count less than zero.
  */
 @Slf4j
-@NotThreadSafe
-public class BlockQueue<T> {
+@ThreadSafe
+public class CustomBlockQueue<T> {
 
     private ReentrantLock lock = new ReentrantLock();
 
@@ -39,11 +29,11 @@ public class BlockQueue<T> {
 
     private Object[] value;
 
-    public BlockQueue(){
+    public CustomBlockQueue(){
         value = new Object[maxLength];
     }
 
-    public BlockQueue(Integer maxLength){
+    public CustomBlockQueue(Integer maxLength){
         this.maxLength = maxLength;
         value = new Object[maxLength];
     }
@@ -51,7 +41,7 @@ public class BlockQueue<T> {
     public void put(T val) throws InterruptedException {
         lock.lock();
         try {
-            if (count.equals(maxLength)){
+            while (count.equals(maxLength)){
                 log.info("The queue is full!");
                 full.await();
             }
@@ -69,7 +59,7 @@ public class BlockQueue<T> {
         lock.lock();
         Object val;
         try {
-            if (count == 0){
+            while (count == 0){
                 empty.await();
             }
             takeIndex = takeIndex % maxLength;

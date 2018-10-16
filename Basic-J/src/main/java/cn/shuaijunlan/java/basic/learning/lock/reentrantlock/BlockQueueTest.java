@@ -56,7 +56,7 @@ public class BlockQueueTest {
 
     @Test
     public void test2() throws InterruptedException {
-        BlockQueue<Integer> blockQueueWithCondition = new BlockQueue<>();
+        CustomBlockQueue<Integer> blockQueueWithCondition = new CustomBlockQueue<>();
 
         Thread thread1 = new Thread(() -> {
             try {
