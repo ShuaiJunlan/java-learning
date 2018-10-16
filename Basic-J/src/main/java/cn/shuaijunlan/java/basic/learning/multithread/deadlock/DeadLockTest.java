@@ -1,9 +1,13 @@
 package cn.shuaijunlan.java.basic.learning.multithread.deadlock;
 
+
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Junlan Shuaijunlan[shuaijunlan@gmail.com].
  * @since Created in 4:38 PM 10/15/18.
  */
+@Slf4j
 public class DeadLockTest extends Thread {
     private final String lock1;
     private final String lock2;
@@ -29,6 +33,7 @@ public class DeadLockTest extends Thread {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        log.info("Current thread name is {}, and the daemon of it is {}!", Thread.currentThread().getName(), Thread.currentThread().isDaemon());
         String lock1 = "Lock1";
         String lock2 = "Lock2";
         DeadLockTest deadLockTest1 = new DeadLockTest(lock1, lock2);
@@ -38,4 +43,5 @@ public class DeadLockTest extends Thread {
         deadLockTest1.join();
         deadLockTest2.join();
     }
+
 }
