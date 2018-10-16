@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * The class will achieve an blocking queue basing on {@link ReentrantLock} and {@link Condition},
  * and providing take() and put() methods.
  */
-public class BlockQueueWithSignal<T> {
+public class BlockQueueWithCondition<T> {
 
     private ReentrantLock lock = new ReentrantLock();
     private Condition full = lock.newCondition();
@@ -22,11 +22,11 @@ public class BlockQueueWithSignal<T> {
 
     private Object[] value;
 
-    public BlockQueueWithSignal(){
+    public BlockQueueWithCondition(){
         value = new Object[maxLength];
     }
 
-    public BlockQueueWithSignal(Integer maxLength){
+    public BlockQueueWithCondition(Integer maxLength){
         this.maxLength = maxLength;
         value = new Object[maxLength];
     }
