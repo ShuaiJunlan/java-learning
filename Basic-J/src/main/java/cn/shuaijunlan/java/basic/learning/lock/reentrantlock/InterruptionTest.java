@@ -1,6 +1,7 @@
 package cn.shuaijunlan.java.basic.learning.lock.reentrantlock;
 
 import com.sun.org.apache.bcel.internal.generic.LoadClass;
+import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
@@ -23,19 +24,20 @@ public class InterruptionTest {
         public void run() {
             try {
                 System.out.println(Thread.currentThread().getName() + " is running!");
-                lock.lockInterruptibly();
+                lock.lockInterruptibly(); //java.lang.InterruptedException
                 System.out.println(Thread.currentThread().getName() + " is over!");
             } catch (InterruptedException e) {
                 System.out.println("Got an exception!");
                 e.printStackTrace();
             }finally {
-                lock.unlock();
+                lock.unlock();//java.lang.IllegalMonitorStateException
                 System.out.println("Unlock! 1");
             }
         }
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void test() {
         Lock lock = new ReentrantLock();
         InnerClass innerClass = new InnerClass(lock);
         Thread thread = new Thread(innerClass);
