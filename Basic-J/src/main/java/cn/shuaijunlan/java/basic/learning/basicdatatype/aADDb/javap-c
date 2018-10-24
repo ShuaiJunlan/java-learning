@@ -1,0 +1,37 @@
+public class cn.shuaijunlan.java.basic.learning.basicdatatype.aADDb.aADDbTest {
+  public cn.shuaijunlan.java.basic.learning.basicdatatype.aADDb.aADDbTest();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void test1();
+    Code:
+       0: iconst_3
+       1: istore_1
+       2: bipush        10
+       4: istore_2
+       5: iload_1
+       6: iload_2
+       7: iadd
+       8: istore_1
+       9: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+      12: iload_1
+      13: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V
+      16: return
+
+  public void test2();
+    Code:
+       0: iconst_3
+       1: istore_1
+       2: bipush        10
+       4: istore_2
+       5: iload_1
+       6: iload_2
+       7: iadd
+       8: istore_1
+       9: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+      12: iload_1
+      13: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V
+      16: return
+}
