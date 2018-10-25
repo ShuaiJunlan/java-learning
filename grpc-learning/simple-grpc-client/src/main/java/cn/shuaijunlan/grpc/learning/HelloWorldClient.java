@@ -1,10 +1,11 @@
 package cn.shuaijunlan.grpc.learning;
 
+import cn.shuaijunlan.grpc.leagning.helloworld.GreeterGrpc;
+import cn.shuaijunlan.grpc.leagning.helloworld.HelloReply;
+import cn.shuaijunlan.grpc.leagning.helloworld.HelloRequest;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.examples.helloworld.GreeterGrpc;
-import io.grpc.examples.helloworld.HelloReply;
-import io.grpc.examples.helloworld.HelloRequest;
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +34,8 @@ public class HelloWorldClient {
     public  void greet(String name){
         HelloRequest request = HelloRequest.newBuilder().setName(name).build();
         HelloReply response = blockingStub.sayHello(request);
+
+
         System.out.println(response.getMessage());
 
     }
@@ -40,7 +43,7 @@ public class HelloWorldClient {
     public static void main(String[] args) throws InterruptedException {
         HelloWorldClient client = new HelloWorldClient("127.0.0.1",50051);
         for(int i=0;i<5;i++){
-            client.greet("world:"+i);
+            client.greet("Junlan"+i);
         }
 
 
