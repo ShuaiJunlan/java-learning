@@ -107,6 +107,6 @@ public class HelloWorldClient {
             barrier.reset();
             client.greetFuture("Junlan" + i);
         }
-        Thread.sleep(10000);
+        // Thread.sleep(10000);
     }
 }
