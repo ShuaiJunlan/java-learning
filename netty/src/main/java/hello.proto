@@ -1,0 +1,13 @@
+syntax = "proto3";
+package com.xxx.tutorial.demo.grpc;
+
+option java_package = "cn.shuaijunlan.netty.protobuf";
+option java_outer_classname = "HelloProto";
+
+message HelloRequest{
+    string name  = 1;
+    int32 id    = 2;
+}
+message HelloResponse{
+    string message = 1;
+}

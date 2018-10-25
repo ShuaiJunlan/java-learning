@@ -22,6 +22,7 @@
         <module>SSM</module>
         <module>testmarkdown</module>
         <module>zookeeper</module>
+        <module>grpc-learning</module>
     </modules>
     <build>
         <finalName>basic</finalName>

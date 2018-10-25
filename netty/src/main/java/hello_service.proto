@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.xxx.tutorial.demo.grpc;
+
+
+option java_package = "cn.shuaijunlan.netty.protobuf";
+option java_outer_classname = "GreetingService";
+
+import "hello.proto";
+
+service HelloService{
+    rpc sayHello(HelloRequest) returns (HelloResponse);
+}
