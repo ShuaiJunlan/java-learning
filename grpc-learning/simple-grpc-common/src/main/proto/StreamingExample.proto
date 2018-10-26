@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "cn.shuaijunlan.grpc.leagning.streaming";
+option java_outer_classname = "StreamingExample";
+option objc_class_prefix = "SJL";
+
+import "google/protobuf/timestamp.proto";
+package streaming;
+
+message Metric {
+    google.protobuf.Timestamp timestamp = 1;
+    int64 metric = 2;
+}
+
+message Average {
+    double val = 1;
+}
+
+service MetricsService {
+    rpc collect(stream Metric) returns (Average);
+}

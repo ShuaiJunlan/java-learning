@@ -1,4 +1,4 @@
-package cn.shuaijunlan.grpc.learning;
+package cn.shuaijunlan.grpc.learning.helloworld;
 
 import cn.shuaijunlan.grpc.leagning.helloworld.GreeterGrpc;
 import cn.shuaijunlan.grpc.leagning.helloworld.HelloReply;
