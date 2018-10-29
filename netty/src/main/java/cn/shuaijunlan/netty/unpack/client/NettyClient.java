@@ -1,9 +1,7 @@
 package cn.shuaijunlan.netty.unpack.client;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.epoll.Epoll;
 import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.epoll.EpollSocketChannel;
@@ -36,14 +34,16 @@ public class NettyClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new FirstClientHandler());
+                        ch.pipeline().
+                                addLast(new ClientHandlerLifeCycleTest()).
+                                addLast(new FirstClientHandler());
                     }
                 });
         connect(bootstrap, host, port, MAX_RETRY);
     }
 
     private static void connect(Bootstrap bootstrap, String host, int port, int retry){
-        bootstrap.connect(host, port).addListener(future -> {
+        ChannelFuture channelFuture = bootstrap.connect(host, port).addListener(future -> {
             if (future.isSuccess()){
                 System.out.println("连接成功！");
             }else if (retry == 0){

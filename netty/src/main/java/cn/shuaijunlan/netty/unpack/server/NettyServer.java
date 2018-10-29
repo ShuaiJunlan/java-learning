@@ -32,7 +32,9 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new FixedLengthFrameDecoder(15));//fixed length unpack
+                        ch.pipeline().
+                                addLast(new ServerHandlerLifeCycleTest()).
+                                addLast(new FixedLengthFrameDecoder(15));//fixed length unpack
                         ch.pipeline().addLast(new FirstServerHandler());
                     }
                 });
