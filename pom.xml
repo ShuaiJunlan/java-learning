@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>java-basic</groupId>
-    <artifactId>basic</artifactId>
+    <artifactId>java-basic</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>Basic-J Maven Webapp</name>
@@ -26,7 +26,7 @@
         <module>learning-parallel-programming</module>
     </modules>
     <build>
-        <finalName>basic</finalName>
+        <finalName>java-basic</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
