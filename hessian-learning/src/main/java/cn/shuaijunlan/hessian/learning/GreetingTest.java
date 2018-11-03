@@ -1,0 +1,18 @@
+package cn.shuaijunlan.hessian.learning;
+
+import com.caucho.hessian.client.HessianProxyFactory;
+
+import java.net.MalformedURLException;
+
+/**
+ * @author Junlan Shuai[shuaijunlan@gmail.com].
+ * @since Created in 2:21 PM 11/3/18.
+ */
+public class GreetingTest {
+    public static void main(String[] args) throws MalformedURLException {
+        String url = "http://hessian.caucho.com/test/test";
+        HessianProxyFactory factory = new HessianProxyFactory();
+        BasicAPI basicAPI = (BasicAPI) factory.create(BasicAPI.class, url);
+        System.out.println("hello():" + basicAPI.hello());
+    }
+}

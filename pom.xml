@@ -24,6 +24,7 @@
         <module>zookeeper</module>
         <module>grpc-learning</module>
         <module>learning-parallel-programming</module>
+        <module>hessian-learning</module>
     </modules>
     <build>
         <finalName>java-basic</finalName>
