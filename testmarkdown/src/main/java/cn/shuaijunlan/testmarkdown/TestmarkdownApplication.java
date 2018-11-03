@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class TestmarkdownApplication {
     @Bean
-    public ServletRegistrationBean servletRegistrationBean(){
-        return new ServletRegistrationBean(new HessianServiceImpl(), "/test");
+    public ServletRegistrationBean<HessianServiceImpl> servletRegistrationBean(){
+        return new ServletRegistrationBean<>(new HessianServiceImpl(), "/test");
     }
 
     public static void main(String[] args) {
