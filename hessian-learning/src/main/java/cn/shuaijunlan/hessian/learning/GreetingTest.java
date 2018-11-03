@@ -10,7 +10,10 @@ import java.net.MalformedURLException;
  */
 public class GreetingTest {
     public static void main(String[] args) throws MalformedURLException {
-        String url = "http://hessian.caucho.com/test/test";
+        // String url = "http://hessian.caucho.com/test/test";
+        //The implement service in testmarkdown module, you can look into.
+
+        String url = "http://localhost:8083/mark/test";
         HessianProxyFactory factory = new HessianProxyFactory();
         BasicAPI basicAPI = (BasicAPI) factory.create(BasicAPI.class, url);
         System.out.println("hello():" + basicAPI.hello());
