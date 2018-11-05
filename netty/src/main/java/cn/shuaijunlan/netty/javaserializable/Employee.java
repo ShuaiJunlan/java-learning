@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @since Created in 9:19 PM 11/4/18.
  */
 public class Employee implements Serializable {
-    private static final long serialVersionUID = 1111;
+    private static final long serialVersionUID = 1111L;
     public String name;
     public String address;
     public transient int qq;
