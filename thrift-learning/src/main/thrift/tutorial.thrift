@@ -5,15 +5,9 @@ include "shared.thrift"
  * target languages.
  */
 
-namespace cl tutorial
-namespace cpp tutorial
-namespace d tutorial
-namespace dart tutorial
-namespace java tutorial
-namespace php tutorial
-namespace perl tutorial
-namespace haxe tutorial
-namespace netcore tutorial
+namespace go shared
+namespace cpp shared
+namespace java shared
 
 /**
  * Thrift lets you do typedefs to get pretty names for your types. Standard
