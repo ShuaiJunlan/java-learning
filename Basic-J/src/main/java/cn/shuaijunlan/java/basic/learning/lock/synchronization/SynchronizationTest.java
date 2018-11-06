@@ -12,7 +12,7 @@ public class SynchronizationTest {
             Object lock1 = lock;
             synchronized (lock1){
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(5000);
                     System.out.println("Hello lock1!");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
