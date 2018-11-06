@@ -27,10 +27,15 @@ public class SynchronizationTest {
         new Thread(() -> {
             Object lock2 = lock;
             synchronized (lock2){
-                System.out.println("Hello lock2!");
+                try {
+                    Thread.sleep(2000);
+                    System.out.println("Hello lock2!");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
-
+        System.out.println("Hello main!");
     }
     @Test
     public void test1() throws InterruptedException {
