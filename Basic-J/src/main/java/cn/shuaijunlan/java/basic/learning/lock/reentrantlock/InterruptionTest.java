@@ -15,6 +15,7 @@ public class InterruptionTest {
     static Lock lock = new ReentrantLock();
 
     static class InnerClass implements Runnable{
+
         private Lock lock;
         public InnerClass(Lock lock){
             this.lock = lock;
