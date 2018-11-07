@@ -8,11 +8,14 @@ import java.util.concurrent.Phaser;
  * @since Created in 2:26 PM 11/7/18.
  */
 public class PhaserTest {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args)
+            throws InterruptedException {
         final Phaser phaser = new Phaser(1);
         for (int index = 1; index <= 10; index++){
             phaser.register();
-            new Thread(new Player(phaser), "Player" + index).start();
+            new Thread(
+                    new Player(phaser),
+                    "Player" + index).start();
         }
         System.out.println("Game start");
         phaser.arriveAndDeregister();
@@ -35,14 +38,17 @@ class Player implements Runnable{
 
         try {
             //Second step, waiting for all players be ready
-            Thread.sleep(new Random().nextInt(100) * 10L);
-            System.out.println(Thread.currentThread().getName() + " ready");
+            Thread.sleep(
+                    new Random().nextInt(100) * 10L);
+            System.out.println(
+                    Thread.currentThread().getName() + " ready");
             phaser.arriveAndAwaitAdvance();
 
             /////////////////running////////////////////
 
             //Third step, waiting for all players arrived, then competition finishing.
-            System.out.println(Thread.currentThread().getName() + " arrived");
+            System.out.println(
+                    Thread.currentThread().getName() + " arrived");
             phaser.arriveAndDeregister();
         } catch (InterruptedException e) {
             e.printStackTrace();
