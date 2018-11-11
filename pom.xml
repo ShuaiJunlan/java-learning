@@ -26,6 +26,7 @@
         <module>learning-parallel-programming</module>
         <module>hessian-learning</module>
         <module>thrift-learning</module>
+        <module>serialization-learning</module>
     </modules>
     <build>
         <finalName>java-basic</finalName>
