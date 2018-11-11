@@ -13,10 +13,12 @@
     <packaging>pom</packaging>
     <modules>
         <module>fst-serialization</module>
+        <module>kryo-serialization</module>
     </modules>
 
     <properties>
         <fst.version>2.56</fst.version>
+        <kryo.version>5.0.0-RC1</kryo.version>
     </properties>
 
     <dependencyManagement>
@@ -26,6 +28,12 @@
                 <artifactId>fst</artifactId>
                 <version>${fst.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.esotericsoftware</groupId>
+                <artifactId>kryo</artifactId>
+                <version>${kryo.version}</version>
+            </dependency>
+            <!--pojo object-->
             <dependency>
                 <groupId>cn.shuaijunlan</groupId>
                 <artifactId>netty</artifactId>
