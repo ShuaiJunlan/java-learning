@@ -11,4 +11,10 @@ public class ThreadTest {
     public void test1(){
         Thread thread = new Thread();
     }
+
+    @Test
+    public void test2() throws InterruptedException {
+        Thread.sleep(0);
+        System.out.println("what is the meaning");
+    }
 }
