@@ -32,4 +32,18 @@ public class WaitTest {
         }
         System.out.println("world");
     }
+
+    @Test
+    public void test3(){
+        synchronized (object){
+            System.out.println("hello");
+            try {
+                // object.wait();
+                object.wait(0);
+                System.out.println("world");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
