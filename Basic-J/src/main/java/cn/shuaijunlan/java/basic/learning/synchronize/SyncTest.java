@@ -18,7 +18,7 @@ public class SyncTest {
 
 }
 class TestReentrant{
-    public synchronized void printName(){
+    synchronized void printName(){
         System.out.println("Shuai Junlan");
         printAge();
         try {
@@ -28,12 +28,12 @@ class TestReentrant{
         }
         System.out.println("end");
     }
-    public synchronized void printAge(){
+    private synchronized void printAge(){
 
         System.out.println(22);
 
     }
-    public synchronized void printNumber(){
+    synchronized void printNumber(){
         System.out.println(110);
     }
 }
