@@ -8,6 +8,8 @@ import java.util.List;
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
  * @since Created in 9:26 AM 11/19/18.
+ *
+ * TODO: Reference https://blog.csdn.net/w574951402/article/details/53246777
  */
 public class ArraysTest {
     @Test
