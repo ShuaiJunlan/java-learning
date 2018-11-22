@@ -65,14 +65,14 @@ public class JoinResultDemoTest {
         //result list
         List<Integer> integerList = new ArrayList<>(10);
         //main thread starting time
-        Long start = System.currentTimeMillis();
+        long start = System.currentTimeMillis();
         for (int i = 0; i < 10; i++){
             FutureTask<Integer> futureTask = new FutureTask<>(new CallableTask(i + 1));
             executorService.submit(futureTask);
             list.add(futureTask);
         }
         //get joined result starting time
-        Long getResultStart = System.currentTimeMillis();
+        long getResultStart = System.currentTimeMillis();
         while (list.size() > 0){
             Iterator<FutureTask<Integer>> iterator = list.iterator();
             while (iterator.hasNext()){
