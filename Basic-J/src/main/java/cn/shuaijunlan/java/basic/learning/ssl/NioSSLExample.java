@@ -42,12 +42,14 @@ public class NioSSLExample {
         final BaseNioSSLProvider ssl = new BaseNioSSLProvider(key, engine, ioBufferSize, ioWorker, taskWorker) {
             @Override
             public void onInput(ByteBuffer decrypted) {
+                System.out.println("response++++++++++++++");
                 //http response
                 byte[] dst = new byte[decrypted.remaining()];
                 decrypted.get(dst);
                 String response = new String(dst);
                 System.out.println(response);
                 System.out.flush();
+                System.out.println("response==============");
             }
 
             @Override
