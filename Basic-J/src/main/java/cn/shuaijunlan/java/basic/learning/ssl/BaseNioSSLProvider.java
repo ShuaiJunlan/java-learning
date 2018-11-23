@@ -12,10 +12,10 @@ import java.util.concurrent.Executor;
  * @author Shuai Junlan[shuaijunlan@gmail.com].
  * @since Created in 2:41 PM 11/23/18.
  */
-public abstract class NioSSLProvider extends SSLProvider {
+public abstract class BaseNioSSLProvider extends BaseSSLProvider {
     private final ByteBuffer buffer = ByteBuffer.allocate(32 * 1024);
     private final SelectionKey key;
-    public NioSSLProvider(SelectionKey key, SSLEngine engine, int bufferSize, Executor ioWorker, Executor taskWorker){
+    public BaseNioSSLProvider(SelectionKey key, SSLEngine engine, int bufferSize, Executor ioWorker, Executor taskWorker){
         super(engine, bufferSize, ioWorker, taskWorker);
         this.key = key;
     }

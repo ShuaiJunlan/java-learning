@@ -10,13 +10,13 @@ import java.util.concurrent.Executor;
  * @author Shuai Junlan[shuaijunlan@gmail.com].
  * @since Created in 2:41 PM 11/23/18.
  */
-public abstract class SSLProvider implements Runnable {
+public abstract class BaseSSLProvider implements Runnable {
     final SSLEngine engine;
     final Executor ioWorker, taskWorker;
     final ByteBuffer clientWrap, clientUnwrap;
     final ByteBuffer serverWrap, serverUnwrap;
 
-    public SSLProvider(SSLEngine engine, int capacity, Executor ioWorker, Executor taskWorker) {
+    public BaseSSLProvider(SSLEngine engine, int capacity, Executor ioWorker, Executor taskWorker) {
         this.clientWrap = ByteBuffer.allocate(capacity);
         this.serverWrap = ByteBuffer.allocate(capacity);
         this.clientUnwrap = ByteBuffer.allocate(capacity);
@@ -44,7 +44,7 @@ public abstract class SSLProvider implements Runnable {
             @Override
             public void run() {
                 clientWrap.put(data);
-                SSLProvider.this.run();
+                BaseSSLProvider.this.run();
             }
         });
     }
@@ -54,7 +54,7 @@ public abstract class SSLProvider implements Runnable {
             @Override
             public void run() {
                 clientUnwrap.put(data);
-                SSLProvider.this.run();
+                BaseSSLProvider.this.run();
             }
         });
     }
@@ -93,7 +93,7 @@ public abstract class SSLProvider implements Runnable {
                 final Runnable sslTask = engine.getDelegatedTask();
                 Runnable wrappedTask = () -> {
                     sslTask.run();
-                    ioWorker.execute(SSLProvider.this);
+                    ioWorker.execute(BaseSSLProvider.this);
                 };
                 taskWorker.execute(wrappedTask);
                 return false;

@@ -2,11 +2,9 @@ package cn.shuaijunlan.java.basic.learning.ssl;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLEngine;
-import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLSession;
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -41,7 +39,7 @@ public class NioSSLExample {
         engine.setUseClientMode(true);
         engine.beginHandshake();
         final int ioBufferSize = 32 * 1024;
-        final NioSSLProvider ssl = new NioSSLProvider(key, engine, ioBufferSize, ioWorker, taskWorker) {
+        final BaseNioSSLProvider ssl = new BaseNioSSLProvider(key, engine, ioBufferSize, ioWorker, taskWorker) {
             @Override
             public void onInput(ByteBuffer decrypted) {
                 //http response
