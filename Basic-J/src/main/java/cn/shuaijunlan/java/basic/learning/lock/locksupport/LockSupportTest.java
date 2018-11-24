@@ -81,6 +81,21 @@ public class LockSupportTest {
         System.out.println("main over");
 
     }
+    @Test
+    public void test6(){
+        final Thread thread = Thread.currentThread();
+        new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+                LockSupport.unpark(thread);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        System.out.println("Parking");
+        LockSupport.park();
+        System.out.println("Finish");
+    }
 
 
 }
