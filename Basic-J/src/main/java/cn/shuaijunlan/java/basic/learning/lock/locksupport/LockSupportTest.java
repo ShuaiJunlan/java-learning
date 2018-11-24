@@ -13,7 +13,7 @@ public class LockSupportTest {
     public void test1(){
         System.out.println("Hello waiting 1000ms");
         long start = System.currentTimeMillis();
-        LockSupport.parkNanos(1000);
+        LockSupport.parkNanos(1000 * 1000 * 1000);
         long end = System.currentTimeMillis();
         System.out.printf("Finish, spending %s ms.", end - start);
     }
