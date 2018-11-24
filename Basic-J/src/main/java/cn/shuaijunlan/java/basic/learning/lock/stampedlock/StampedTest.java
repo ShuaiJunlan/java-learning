@@ -15,6 +15,7 @@ public class StampedTest {
         Thread thread = new Thread(() -> {
             System.out.println("tryOptimisticRead:" + System.currentTimeMillis());
             long stamped = stampedLock.tryOptimisticRead();
+            // long stamped = stampedLock.tryReadLock();
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
