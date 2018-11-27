@@ -47,17 +47,24 @@ public class NIOClient {
                 SelectionKey k = iterator.next();
 
                 if (k.isConnectable()){
-                    System.out.println("client connect");
+
                     SocketChannel client = (SocketChannel) k.channel();
                     if (client.isConnectionPending()){
                         client.finishConnect();
-                        sendBuffer.clear();
+                        System.out.println("client connect");
 
-                        byte[] se = "Hello Shuai".getBytes();
-                        sendBuffer.put(se);
-                        sendBuffer.flip();
+                        for (int i = 0; i < 1000; i++) {
+                            sendBuffer.clear();
 
-                        client.write(sendBuffer);
+                            byte[] se = "Hello Shuai".getBytes();
+                            sendBuffer.put(se);
+                            sendBuffer.flip();
+
+                            client.write(sendBuffer);
+                        }
+                        System.out.println("Finish!");
+                        // client.close();
+                        // System.exit(1);
                     }
 
                 }else if (k.isReadable()){

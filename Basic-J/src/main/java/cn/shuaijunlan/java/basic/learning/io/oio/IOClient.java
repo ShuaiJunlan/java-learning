@@ -17,14 +17,17 @@ public class IOClient {
         executor.execute(() -> {
             try {
                 Socket socket = new Socket("127.0.0.1", 8000);
-                while (true){
+                int i = 0;
+                while (i < 1000){
                     try {
                         socket.getOutputStream().write((new Date() + " :hello world!").getBytes());
-                        Thread.sleep(2000);
+                        Thread.sleep(2);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
+                    }finally {
+                        i++;
                     }
                 }
             } catch (UnknownHostException e) {
