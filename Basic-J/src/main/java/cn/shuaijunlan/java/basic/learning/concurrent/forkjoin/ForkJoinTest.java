@@ -36,6 +36,11 @@ public class ForkJoinTest extends RecursiveTask<Integer> {
             System.out.println(re.get());
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
+        }finally {
+            if (forkJoinTest.isCompletedAbnormally()){
+                forkJoinTest.getException().printStackTrace();
+            }
+            forkJoinPool.shutdown();
         }
     }
 
