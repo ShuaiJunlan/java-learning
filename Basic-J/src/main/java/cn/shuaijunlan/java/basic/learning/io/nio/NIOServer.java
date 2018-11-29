@@ -81,6 +81,7 @@ public class NIOServer {
                                     if (c == -1){
                                         System.out.println("client disconnect!!");
                                         clientChannel.close();
+                                        key.cancel();
                                         continue;
                                     }
                                     byteBuffer.flip();
