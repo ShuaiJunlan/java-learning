@@ -38,11 +38,22 @@ public class TryCatchTest {
     @Test
     public void test2(){
         System.out.println(getValue());
+        System.out.println(getValue11());
     }
 
     public int getValue(){
         try {
             int b = 1 / 0;
+            return 1;
+        }catch (Exception e){
+            return 2;
+        }finally {
+            return 3;
+        }
+    }
+
+    public int getValue11(){
+        try {
             return 1;
         }catch (Exception e){
             return 2;
@@ -100,6 +111,7 @@ public class TryCatchTest {
         }finally {
             ++x;
         }
+        System.out.println("hh");
         return x;
     }
 }
