@@ -46,6 +46,18 @@
             <artifactId>protostuff-runtime</artifactId>
             <version>1.5.9</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-alpn-openjdk8-client -->
+        <!--<dependency>-->
+            <!--<groupId>org.eclipse.jetty</groupId>-->
+            <!--<artifactId>jetty-alpn-openjdk8-client</artifactId>-->
+            <!--<version>9.4.12.RC0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.eclipse.jetty</groupId>-->
+            <!--<artifactId>jetty-alpn-openjdk8-server</artifactId>-->
+            <!--<version>9.4.12.RC0</version>-->
+        <!--</dependency>-->
+
     </dependencies>
     <build>
         <plugins>
