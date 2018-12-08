@@ -27,4 +27,9 @@ public class IntegerCacheTest {
         Integer b = new Integer(1);
         System.out.println(a == b);
     }
+
+    @Test
+    public void test3(){
+        System.out.println(Integer.MAX_VALUE);
+    }
 }
