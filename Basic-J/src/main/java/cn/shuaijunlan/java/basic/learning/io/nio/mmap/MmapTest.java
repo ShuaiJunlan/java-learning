@@ -17,7 +17,7 @@ public class MmapTest {
         System.out.println(file.length());
         assert file.exists() || file.createNewFile();
         FileChannel channel = new RandomAccessFile(file, "rw").getChannel();
-        MappedByteBuffer mappedByteBuffer = channel.map(FileChannel.MapMode.READ_WRITE, 0, 1000);
+        MappedByteBuffer mappedByteBuffer = channel.map(FileChannel.MapMode.READ_WRITE, 0, Integer.MAX_VALUE);
         System.out.println(file.length());
         for (int i = 0; i < 1000; i++){
             mappedByteBuffer.put((byte)i);
