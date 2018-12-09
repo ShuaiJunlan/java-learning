@@ -17,6 +17,11 @@ public class SonA extends Parent {
         System.out.println("Son:" + name);
     }
 
+
+    /**
+     * parent static method couldn't be extended
+     * @param args
+     */
     public static void main(String[] args) {
         Parent parent = new Parent("p");
         parent.printName();
