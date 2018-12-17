@@ -27,6 +27,7 @@
         <module>hessian-learning</module>
         <module>thrift-learning</module>
         <module>serialization-learning</module>
+        <module>helidon-learning</module>
     </modules>
     <build>
         <finalName>java-basic</finalName>
