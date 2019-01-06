@@ -15,7 +15,7 @@
         <module>DataStructure-J</module>
         <module>DesignPatterns</module>
         <module>Multithread-J</module>
-        <module>netty</module>
+        <module>netty-learning</module>
         <module>Rewriting-J</module>
         <module>Spring</module>
         <module>SpringL</module>
@@ -28,6 +28,7 @@
         <module>thrift-learning</module>
         <module>serialization-learning</module>
         <module>helidon-learning</module>
+        <module>javassist-learning</module>
     </modules>
     <build>
         <finalName>java-basic</finalName>
