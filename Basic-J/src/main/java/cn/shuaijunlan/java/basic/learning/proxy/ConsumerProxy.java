@@ -9,7 +9,7 @@ import java.lang.reflect.Proxy;
  * @date Created on 9:09 PM 2018/08/12.
  */
 public class ConsumerProxy {
-    public static <T> T consumer(final Class<T> interfaces){
+    public static <T> T newInstance(final Class<T> interfaces){
         return (T) Proxy.newProxyInstance(interfaces.getClassLoader(), new Class<?>[]{interfaces}, new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -21,7 +21,7 @@ public class ConsumerProxy {
     }
 
     public static void main(String[] args) {
-        IHelloService helloService = ConsumerProxy.consumer(IHelloService.class);
+        IHelloService helloService = ConsumerProxy.newInstance(IHelloService.class);
         System.out.println(helloService.sayHello("hello"));
     }
 }
