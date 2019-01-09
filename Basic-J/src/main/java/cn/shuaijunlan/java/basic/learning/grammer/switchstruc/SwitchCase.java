@@ -12,4 +12,13 @@ public class SwitchCase {
                 System.out.println(10);
         }
     }
+    public void test1(){
+        long a = 100;
+        // todo: required char byte short int Character Byte Short Integer String or Enum
+        // switch (a){
+        //     case 100:
+        //         System.out.println(1);
+        //         break;
+        // }
+    }
 }
