@@ -37,4 +37,29 @@ public class ExecuteServiceTest {
             }
         };
     }
+    @Test
+    public void test2(){
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 10, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<>(1));
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    TimeUnit.SECONDS.sleep(20);
+                    System.out.println(11);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        for (int i = 0; i < 10; i++){
+            executor.execute(thread);
+        }
+
+        try {
+            TimeUnit.SECONDS.sleep(233);
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
