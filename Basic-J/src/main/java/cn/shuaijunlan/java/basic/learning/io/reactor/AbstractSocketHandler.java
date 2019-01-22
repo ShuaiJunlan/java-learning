@@ -23,7 +23,6 @@ public abstract class AbstractSocketHandler implements Runnable {
     ServerDispatcher dispatcher;
     private final static Logger logger = Logger.getLogger(AbstractSocketHandler.class);
     private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-    ;
 
     AbstractSocketHandler(ServerDispatcher dispatcher, ServerSocketChannel sc, Selector selector) throws IOException {
         this.selector = selector;
@@ -32,8 +31,8 @@ public abstract class AbstractSocketHandler implements Runnable {
     }
 
     /**
-     * @param readyKeyOps
-     * @throws IOException
+     * @param readyKeyOps 操作标志位
+     * @throws IOException 抛出异常
      */
     public abstract void runnerExecute(int readyKeyOps) throws IOException;
 
@@ -48,7 +47,12 @@ public abstract class AbstractSocketHandler implements Runnable {
 
                 Thread.sleep(1000);
             } catch (Exception e) {
-                e.printStackTrace();
+                try {
+                    socketChannel.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                logger.error(e.getMessage());
             } finally {
                 readWriteLock.readLock().unlock();
             }
@@ -66,15 +70,19 @@ public abstract class AbstractSocketHandler implements Runnable {
             while (iterator.hasNext()) {
                 SelectionKey key = (SelectionKey) iterator.next();
                 iterator.remove();
+
                 keyOps = key.readyOps();
+                // if (!key.isWritable() && !key.isReadable()){
+                //     logger.info("if (!key.isWritable() && !key.isReadable())");
+                //     continue;
+                // }
                 if (keyOps == SelectionKey.OP_READ || keyOps == SelectionKey.OP_WRITE) {
                     socketChannel = (SocketChannel) key.channel();
                     socketChannel.configureBlocking(false);
+                    logger.info("keyOps is " + keyOps);
                 }
             }
-
         }
         return keyOps;
     }
-
 }
