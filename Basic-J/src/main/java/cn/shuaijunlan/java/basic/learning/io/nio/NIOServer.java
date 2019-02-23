@@ -29,12 +29,17 @@ public class NIOServer {
 
         ExecutorService executorService = Executors.newFixedThreadPool(10);
 
+        //init
+        ServerSocketChannel listenChannel = ServerSocketChannel.open();
+        listenChannel.configureBlocking(false);
+
+        //register
         executorService.execute(() -> {
             try {
-                ServerSocketChannel listenChannel = ServerSocketChannel.open();
-                listenChannel.socket().bind(new InetSocketAddress(8000));
-                listenChannel.configureBlocking(false);
                 listenChannel.register(serverSelector, SelectionKey.OP_ACCEPT);
+
+                //binding
+                listenChannel.socket().bind(new InetSocketAddress(8000));
                 while (true){
                     if (serverSelector.select(1) > 0){
                         Set<SelectionKey> set = serverSelector.selectedKeys();

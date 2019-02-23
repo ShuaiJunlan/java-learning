@@ -18,7 +18,7 @@ CodeMirror.defineMode("sparql", function(config) {
   function wordRegexp(words) {
     return new RegExp("^(?:" + words.join("|") + ")$", "i");
   }
-  var ops = wordRegexp(["str", "lang", "langmatches", "datatype", "bound", "sameterm", "isiri", "isuri",
+  var ops = wordRegexp(["string", "lang", "langmatches", "datatype", "bound", "sameterm", "isiri", "isuri",
                         "iri", "uri", "bnode", "count", "sum", "min", "max", "avg", "sample",
                         "group_concat", "rand", "abs", "ceil", "floor", "round", "concat", "substr", "strlen",
                         "replace", "ucase", "lcase", "encode_for_uri", "contains", "strstarts", "strends",

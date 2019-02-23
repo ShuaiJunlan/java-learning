@@ -37,7 +37,7 @@ public final class StreamingExample {
       "gle/protobuf/timestamp.proto\"G\n\006Metric\022-" +
       "\n\ttimestamp\030\001 \001(\0132\032.google.protobuf.Time" +
       "stamp\022\016\n\006metric\030\002 \001(\003\"\026\n\007Average\022\013\n\003val\030" +
-      "\001 \001(\0012D\n\016MetricsService\0222\n\007collect\022\021.str" +
+      "\001 \001(\0012D\n\016MetricsService\0222\n\007collect\022\021.string" +
       "eaming.Metric\032\022.streaming.Average(\001BB\n&c" +
       "n.shuaijunlan.grpc.leagning.streamingB\020S" +
       "treamingExampleP\001\242\002\003SJLb\006proto3"

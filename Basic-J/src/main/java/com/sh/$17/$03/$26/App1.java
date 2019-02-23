@@ -22,8 +22,8 @@ public class App1 extends Thread
     }
     public static void main(String[] args)
     {
-//        String str = "hello world";
-//        System.out.println(str.indexOf('h'));
+//        String string = "hello world";
+//        System.out.println(string.indexOf('h'));
 //        System.out.println('a' - 'A');
         App1 app1 = new App1(1);
         for (int  i = 2; i < 100; i++)

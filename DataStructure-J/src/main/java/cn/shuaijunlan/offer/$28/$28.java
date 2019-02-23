@@ -11,30 +11,30 @@ import java.util.ArrayList;
  * 实现全排列
  */
 public class $28 {
-    //    public static void permutation(char[] str, int start)
+    //    public static void permutation(char[] string, int start)
 //    {
-//        if (str == null || str.length <= 0 || start <0)
+//        if (string == null || string.length <= 0 || start <0)
 //            return;
-//        if (start == str.length-1)
-//            printChar(str);
-//        for (int i = start; i < str.length; i++)
+//        if (start == string.length-1)
+//            printChar(string);
+//        for (int i = start; i < string.length; i++)
 //        {
-//            char tempChar = str[start];
-//            str[start] = str[i];
-//            str[i] = tempChar;
+//            char tempChar = string[start];
+//            string[start] = string[i];
+//            string[i] = tempChar;
 //
-//            permutation(str, start + 1);
+//            permutation(string, start + 1);
 //
-//            tempChar = str[start];
-//            str[start] = str[i];
-//            str[i] = tempChar;
+//            tempChar = string[start];
+//            string[start] = string[i];
+//            string[i] = tempChar;
 //        }
 //    }
-//    public static void printChar(char[] str)
+//    public static void printChar(char[] string)
 //    {
-//        for (int i = 0; i < str.length; i++)
+//        for (int i = 0; i < string.length; i++)
 //        {
-//            System.out.print(str[i] + " ");
+//            System.out.print(string[i] + " ");
 //        }
 //        System.out.println();
 //    }

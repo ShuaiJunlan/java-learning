@@ -665,7 +665,7 @@
     
     function keyCheck(str, event) {
         if (typeof str !== 'string')
-            throw(Error('str should be string!'));
+            throw(Error('string should be string!'));
         
         if (typeof event !== 'object')
             throw(Error('event should be object!'));

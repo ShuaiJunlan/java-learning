@@ -61,7 +61,7 @@ CodeMirror.defineMode("sql", function(config, parserConfig) {
     } else if ((((support.nCharCast == true && (ch == "n" || ch == "N"))
         || (support.charsetCast == true && ch == "_" && stream.match(/[a-z][a-z0-9]*/i)))
         && (stream.peek() == "'" || stream.peek() == '"'))) {
-      // charset casting: _utf8'str', N'str', n'str'
+      // charset casting: _utf8'string', N'string', n'string'
       // ref: http://dev.mysql.com/doc/refman/5.5/en/string-literals.html
       return "keyword";
     } else if (/^[\(\),\;\[\]]/.test(ch)) {

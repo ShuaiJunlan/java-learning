@@ -29,7 +29,7 @@
                         "list", "locals", "map", "max", "memoryview", "min", "next",
                         "object", "oct", "open", "ord", "pow", "property", "range",
                         "repr", "reversed", "round", "set", "setattr", "slice",
-                        "sorted", "staticmethod", "str", "sum", "super", "tuple",
+                        "sorted", "staticmethod", "string", "sum", "super", "tuple",
                         "type", "vars", "zip", "__import__", "NotImplemented",
                         "Ellipsis", "__debug__"];
   var py2 = {builtins: ["apply", "basestring", "buffer", "cmp", "coerce", "execfile",

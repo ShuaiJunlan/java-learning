@@ -63,11 +63,11 @@ public class Test
         mark = new int[n];
         for (int i = 0; i < n; i++)
         {
-            String[] str = scanner.nextLine().split(" ");
-            color[i] = str[0].toCharArray()[0];
-            point[i][0] = Integer.valueOf(str[1]);
-            point[i][1] = Integer.valueOf(str[2]);
-            point[i][2] = Integer.valueOf(str[3]);
+            String[] string = scanner.nextLine().split(" ");
+            color[i] = string[0].toCharArray()[0];
+            point[i][0] = Integer.valueOf(string[1]);
+            point[i][1] = Integer.valueOf(string[2]);
+            point[i][2] = Integer.valueOf(string[3]);
         }
         dfs(0, 0);
         System.out.println(new DecimalFormat("#.00000").format(val));
