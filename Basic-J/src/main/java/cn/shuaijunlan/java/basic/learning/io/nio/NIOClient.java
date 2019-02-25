@@ -21,7 +21,7 @@ public class NIOClient {
     private static ByteBuffer sendBuffer = ByteBuffer.allocate(block);
     private static ByteBuffer receiveBuffer = ByteBuffer.allocate(block);
 
-    private static final InetSocketAddress SERVER_ADDRESS = new InetSocketAddress("localhost", 8008);
+    private static final InetSocketAddress SERVER_ADDRESS = new InetSocketAddress("localhost", 8000);
 
     public static void main(String[] args) throws IOException {
         //open socket channel

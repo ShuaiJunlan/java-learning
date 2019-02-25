@@ -41,7 +41,7 @@ public class NIOServer {
                 //binding
                 listenChannel.socket().bind(new InetSocketAddress(8000));
                 while (true){
-                    if (serverSelector.select(1) > 0){
+                    if (serverSelector.select() > 0){
                         Set<SelectionKey> set = serverSelector.selectedKeys();
                         System.out.println("serverSelector size:" + set.size());
                         Iterator<SelectionKey> keyIterator = set.iterator();
@@ -57,6 +57,8 @@ public class NIOServer {
                                 }
                             }
                         }
+                    }else {
+                        System.err.println("Java nio bug");
                     }
                 }
             } catch (ClosedChannelException e) {
@@ -69,7 +71,7 @@ public class NIOServer {
         executorService.execute(() -> {
             try {
                 while (true){
-                    if (clientSelector.select(1) > 0){
+                    if (clientSelector.select() > 0){
                         Set<SelectionKey> set = clientSelector.selectedKeys();
                         System.out.println("clientSelector size:" + set.size());
                         Iterator<SelectionKey> keyIterator = set.iterator();
@@ -102,6 +104,8 @@ public class NIOServer {
                                 }
                             }
                         }
+                    }else {
+                        System.err.println("Java nio bug");
                     }
                 }
             } catch (CharacterCodingException e) {
