@@ -26,3 +26,5 @@ target/
 PLANS.md
 mvnw
 mvnw.cmd
+
+*.test

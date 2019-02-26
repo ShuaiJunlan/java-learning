@@ -13,11 +13,11 @@ import java.nio.channels.FileChannel;
  */
 public class MmapTest {
     public static void main(String[] args) throws IOException {
-        File file = new File("test");
+        File file = new File("data.test");
         System.out.println(file.length());
         assert file.exists() || file.createNewFile();
         FileChannel channel = new RandomAccessFile(file, "rw").getChannel();
-        MappedByteBuffer mappedByteBuffer = channel.map(FileChannel.MapMode.READ_WRITE, 0, Integer.MAX_VALUE);
+        MappedByteBuffer mappedByteBuffer = channel.map(FileChannel.MapMode.READ_WRITE, 0, Integer.MAX_VALUE).load();
         System.out.println(file.length());
         for (int i = 0; i < 1000; i++){
             mappedByteBuffer.put((byte)i);
