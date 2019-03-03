@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>Basic-J</groupId>
     <artifactId>Basic-J</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>Basic-J Maven Webapp</name>
     <url>http://maven.apache.org</url>
@@ -36,6 +36,12 @@
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>moe.cnkirito.kdio</groupId>
+            <artifactId>kdio-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>Basic-J</finalName>

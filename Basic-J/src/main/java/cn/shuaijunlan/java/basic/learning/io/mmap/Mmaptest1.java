@@ -1,4 +1,4 @@
-package cn.shuaijunlan.java.basic.learning.io.nio.mmap;
+package cn.shuaijunlan.java.basic.learning.io.mmap;
 
 import org.junit.Test;
 

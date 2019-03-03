@@ -1,4 +1,4 @@
-package cn.shuaijunlan.java.basic.learning.basicdatatype.integercache;
+package cn.shuaijunlan.java.basic.learning.basicdatatype.integer;
 
 import org.junit.Test;
 
