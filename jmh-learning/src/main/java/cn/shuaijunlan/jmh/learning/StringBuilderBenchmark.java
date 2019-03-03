@@ -14,13 +14,14 @@ import java.util.concurrent.TimeUnit;
  */
 @BenchmarkMode(Mode.Throughput)
 @Warmup(iterations = 1)
-@Measurement(iterations = 1, time = 2, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 1, time = 1, timeUnit = TimeUnit.SECONDS)
 @Threads(2)
 @Fork(2)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class StringBuilderBenchmark {
     @Benchmark
     public void testStringAdd() {
+        // System.out.println(1);
         String a = "";
         for (int i = 0; i < 10; i++) {
             a += i;
@@ -43,7 +44,7 @@ public class StringBuilderBenchmark {
     public static void main(String[] args) throws RunnerException {
         Options options = new OptionsBuilder()
                 .include(StringBuilderBenchmark.class.getSimpleName())
-                .output("Benchmark.log")
+                // .output("Benchmark.log")
                 .build();
         new Runner(options).run();
     }

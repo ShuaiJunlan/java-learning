@@ -29,4 +29,11 @@ public class ArrayListTest {
             integerIterator.remove();
         }
     }
+    @Test
+    public void test2(){
+        ArrayList<Integer> arrayList = new ArrayList<>(16);
+        System.out.println(arrayList.size());
+        arrayList.add(1);
+        System.out.println(arrayList.get(2));
+    }
 }
