@@ -47,4 +47,10 @@ public class Test1 {
         int j = 10;
         System.out.println(i + ~j);
     }
+    @Test
+    public void test5(){
+        int h;
+        Object key = new Object();
+        System.out.println((h = key.hashCode()) ^ (h >>> 16));
+    }
 }
