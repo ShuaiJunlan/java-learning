@@ -30,6 +30,7 @@
         <module>helidon-learning</module>
         <module>javassist-learning</module>
         <module>jmh-learning</module>
+        <module>cglib-learning</module>
     </modules>
     <build>
         <finalName>java-basic</finalName>
