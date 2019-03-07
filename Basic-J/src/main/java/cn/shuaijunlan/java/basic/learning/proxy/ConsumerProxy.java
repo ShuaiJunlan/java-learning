@@ -21,7 +21,8 @@ public class ConsumerProxy {
     }
 
     public static void main(String[] args) {
-        IHelloService IHelloService = ConsumerProxy.newInstance(IHelloService.class);
-        System.out.println(IHelloService.sayHello("hello"));
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
+        IHelloService helloService = ConsumerProxy.newInstance(IHelloService.class);
+        System.out.println(helloService.sayHello("hello"));
     }
 }

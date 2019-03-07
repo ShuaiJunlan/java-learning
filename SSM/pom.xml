@@ -115,6 +115,7 @@
       <groupId>commons-dbcp</groupId>
       <artifactId>commons-dbcp</artifactId>
       <version>1.2.2</version>
+      <scope>runtime</scope>
     </dependency>
 
     <!-- JSTL标签类 -->
@@ -188,6 +189,14 @@
           <include>**/*.xml</include>
         </includes>
         <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+        </includes>
+        <filtering>false</filtering>
       </resource>
     </resources>
     <finalName>SSM</finalName>
