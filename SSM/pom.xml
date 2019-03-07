@@ -180,6 +180,16 @@
 
   </dependencies>
   <build>
+    <resources>
+      <!--编译之后包含xml-->
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <finalName>SSM</finalName>
   </build>
 </project>
