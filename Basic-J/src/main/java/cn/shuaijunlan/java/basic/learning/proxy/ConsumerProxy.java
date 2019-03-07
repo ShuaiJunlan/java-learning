@@ -21,7 +21,7 @@ public class ConsumerProxy {
     }
 
     public static void main(String[] args) {
-        helloService helloService = ConsumerProxy.newInstance(helloService.class);
-        System.out.println(helloService.sayHello("hello"));
+        IHelloService IHelloService = ConsumerProxy.newInstance(IHelloService.class);
+        System.out.println(IHelloService.sayHello("hello"));
     }
 }
