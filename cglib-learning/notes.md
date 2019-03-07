@@ -17,7 +17,10 @@ Java 实现动态代理的缺点：因为 Java 的单继承特性（每个代理
 #### CGlib
 
  * CGLib采用的是用创建一个继承实现类的子类，用asm库动态修改子类的代码来实现的，所以可以用传入的类引用执行代理类
+ * 由于cglib是动态创建子类的方式实现代理，所以缺点是不能对final或private方法进行代理。
  * CGLib创建的动态代理对象性能比JDK创建的动态代理对象的性能高不少，但是CGLib在创建代理对象时所花费的时间却比JDK多得多，所以对于单例的对象，因为无需频繁创建对象，用CGLib合适，反之，使用JDK方式要更为合适一些。同时，由于CGLib由于是采用动态创建子类的方法，对于final方法，无法进行代理
 
  #### References
  * [cglib 教程 - 使用cglib实现动态代理](https://www.jianshu.com/p/e983ecf3e7a5)
+ * [Introduction to cglib](https://www.baeldung.com/cglib)
+ * [CGLib: The Missing Manual](https://dzone.com/articles/cglib-missing-manual)
