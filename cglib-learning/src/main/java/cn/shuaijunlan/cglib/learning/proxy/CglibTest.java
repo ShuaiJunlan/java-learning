@@ -15,7 +15,7 @@ public class CglibTest {
     @Test
     public void test(){
         Enhancer enhancer = new Enhancer();
-        enhancer.setInterfaces(new Class[]{hello.class});
+        enhancer.setInterfaces(new Class[]{IHello.class});
         // enhancer.setSuperclass(hello.class);
 
         CallbackFilter callbackFilter = new CallbackFilter() {
@@ -48,21 +48,21 @@ public class CglibTest {
         Callback[] callbacks = new Callback[]{interceptor, NoOp.INSTANCE};
         enhancer.setCallbacks(callbacks);
 
-        hello hello = (hello) enhancer.create();
+        IHello hello = (IHello) enhancer.create();
         System.out.println(hello.sayHello("Jun"));
     }
 
     @Test
     public void test1(){
         Enhancer enhancer = new Enhancer();
-        enhancer.setInterfaces(new Class[]{hello.class});
-        CallbackFilter callbackFilter = new CallbackFilter() {
-            @Override
-            public int accept(Method method) {
-                return 1;
-            }
-        };
-        enhancer.setCallbackFilter(callbackFilter);
+        enhancer.setInterfaces(new Class[]{IHello.class});
+        // CallbackFilter callbackFilter = new CallbackFilter() {
+        //     @Override
+        //     public int accept(Method method) {
+        //         return 1;
+        //     }
+        // };
+        // enhancer.setCallbackFilter(callbackFilter);
 
         Callback interceptor = new MethodInterceptor() {
             @Override
@@ -71,10 +71,10 @@ public class CglibTest {
                 return "hello" + objects[0].toString();
             }
         };
-        Callback[] callbacks = new Callback[]{interceptor, NoOp.INSTANCE};
+        Callback[] callbacks = new Callback[]{interceptor};
         enhancer.setCallbacks(callbacks);
 
-        hello hello = (hello) enhancer.create();
+        IHello hello = (IHello) enhancer.create();
         System.out.println(hello.sayHello("Jun"));
     }
 }

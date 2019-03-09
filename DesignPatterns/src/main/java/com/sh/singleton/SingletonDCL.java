@@ -3,6 +3,8 @@ package com.sh.singleton;
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
  * @since Created in 11:23 AM 3/8/19.
+ *
+ * todo: https://www.zhihu.com/question/56606703
  */
 public class SingletonDCL {
     private static volatile SingletonDCL singletonDCL = null;
