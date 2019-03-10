@@ -15,6 +15,7 @@ public class DynamicProxyMain {
     }
 
     public static void main(String[] args) throws Exception, SecurityException, Throwable {
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
         RealObject realObject = new RealObject();
         consumer(realObject);
         System.out.println("==============================");

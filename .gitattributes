@@ -1,0 +1,1 @@
+Basic-J/logfile.log filter=lfs diff=lfs merge=lfs -text
