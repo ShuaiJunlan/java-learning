@@ -7,5 +7,13 @@ package cn.shuaijunlan.java.basic.learning.interfaces;
 public class Hello implements ConstantInterface, ConstantInterface1 {
     public static void main(String[] args) {
         System.out.println(ConstantInterface.a);
+        //System.out.println(Hello.a); //
+        Hello hello = new Hello();
+        System.out.println(hello.getName());
+    }
+
+    @Override
+    public String getName() {
+        return "Shuaijunlan";
     }
 }
