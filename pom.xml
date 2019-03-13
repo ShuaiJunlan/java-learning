@@ -11,7 +11,7 @@
 
     </dependencies>
     <modules>
-        <module>Basic-J</module>
+        <module>Basic</module>
         <module>DataStructure-J</module>
         <module>DesignPatterns</module>
         <module>Multithread-J</module>
