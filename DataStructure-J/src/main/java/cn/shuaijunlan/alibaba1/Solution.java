@@ -1,4 +1,4 @@
-package cn.shuaijunlan.alibaba;
+package cn.shuaijunlan.alibaba1;
 
 import java.util.Map;
 import java.util.concurrent.*;
@@ -89,7 +89,7 @@ public class Solution {
     /**
      * 创建字典树
      */
-    private static WordDictionary wordDictionary = new WordDictionary();
+    private static Trie trie = new Trie();
     /**
      * 存储所有单词统计数据
      */
@@ -121,7 +121,7 @@ public class Solution {
         if (word == null || word.trim().length() == 0){
             return 0;
         }
-        return wordDictionary.getWordCount(word);
+        return trie.getWordCount(word);
     }
 
     /**
@@ -129,7 +129,7 @@ public class Solution {
      * @return
      */
     public static Map getCurrentWordsCount(){
-        return wordDictionary.getAllWordStatistics();
+        return trie.getAllWordStatistics();
     }
 
     /////////////////////////////////核心API-end/////////////////////////////////
@@ -314,7 +314,7 @@ public class Solution {
         }
         String[] strings = str.split(" ");
         for (String s : strings){
-            wordDictionary.addWord(s);
+            trie.addWord(s);
         }
     }
 
