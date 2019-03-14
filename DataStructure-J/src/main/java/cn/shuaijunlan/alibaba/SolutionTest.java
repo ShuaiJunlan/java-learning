@@ -6,7 +6,12 @@ package cn.shuaijunlan.alibaba;
  */
 public class SolutionTest {
     public static void main(String[] args) {
+        long start = System.currentTimeMillis();
         Solution solution = new Solution();
         solution.startUp();
+        System.out.println(System.currentTimeMillis() - start);
+
+        //17018 1:4
+
     }
 }
