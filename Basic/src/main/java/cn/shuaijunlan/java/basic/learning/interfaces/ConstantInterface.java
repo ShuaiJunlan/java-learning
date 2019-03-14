@@ -6,4 +6,5 @@ package cn.shuaijunlan.java.basic.learning.interfaces;
  */
 public interface ConstantInterface {
     int a = 10;
+    String getName();
 }
