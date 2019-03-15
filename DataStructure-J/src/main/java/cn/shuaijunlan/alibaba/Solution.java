@@ -1,5 +1,6 @@
 package cn.shuaijunlan.alibaba;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
@@ -38,7 +39,7 @@ public class Solution {
     /**
      * 标记buffer是否加载成功
      */
-    private final boolean[] BUFFER_FLAG = new boolean[BUFFER_COUNT];
+    private final  boolean[] BUFFER_FLAG = new boolean[BUFFER_COUNT];
 
     /**
      * 存储所有单词统计数据
@@ -109,6 +110,7 @@ public class Solution {
                 throw new NullPointerException("task couldn't be null");
             }
             Thread thread = new Thread(r);
+            thread.setDaemon(true);
             thread.setName(PREFIX_NAME + count);
             count++;
             return thread;
@@ -129,6 +131,7 @@ public class Solution {
                 throw new NullPointerException("task couldn't be null");
             }
             Thread thread = new Thread(r);
+            thread.setDaemon(true);
             thread.setName(PREFIX_NAME + count);
             count++;
             return thread;
@@ -177,14 +180,11 @@ public class Solution {
      */
     private void startConsumer(){
         for (int i = 0; i < corePoolSize; i++){
-
             Runnable task = new Runnable() {
                 //当前要消费数据的起始指针
                 private long start = 0;
-
                 //当前要消费数据的终点指针
                 private long end = 0;
-
                 //标记当前线程是否已经获得步数，-1表示没有，其他任意正整数表示已经获取过
                 private long currentStep = -1;
 
@@ -193,45 +193,38 @@ public class Solution {
                     while (true){
                         //防止等待被唤醒后重复消费
                         if (currentStep == -1){
+                            //Warn
                             currentStep = CONSUME_STEPS.getAndIncrement();
                         }
-
                         start = currentStep * STEP_SIZE;
-
                         //被消费的buffer[]的index
-                        int index = (int)(start / SIZE_PER_BUFFER) % BUFFER_COUNT;
-
+                        int index = (int)((start / SIZE_PER_BUFFER) % BUFFER_COUNT);
                         if (start < PRODUCE_BUFFER_COUNT.get() * SIZE_PER_BUFFER && BUFFER_FLAG[index]){
-
+                            //算出终点的位置
+                            end = start + STEP_SIZE - 1;
+                            end %= SIZE_PER_BUFFER;
                             //算出起始位置
                             start %= SIZE_PER_BUFFER;
-
-                            //算出终点的位置
-                            end = start + STEP_SIZE;
-                            end %= SIZE_PER_BUFFER;
-
-                            //构建字典树
+                            //遍历字符串
                             for (int i = (int) start; i <= end; i++){
                                 //插入书名
-                                addString(
-                                        BUFFER[index][i]
-                                );
+                                addString(BUFFER[index][i]);
                             }
-
                             currentStep = -1;
-
-                            //如果有生产者等待，且有一个完整的空闲buffer，则通知消费者
-                            if (hasProviderWaited && end == SIZE_PER_BUFFER-1){
+                            //消费完一个buffer，则标记为false
+                            if (end == SIZE_PER_BUFFER - 1){
+                                BUFFER_FLAG[index] = false;
+                            }
+                            //如果有生产者等待，则通知消费者
+                            if (hasProviderWaited){
                                 lock.lock();
                                 try {
-                                    full.notifyAll();
+                                    full.signalAll();
                                 }finally {
-                                    BUFFER_FLAG[index] = false;
                                     hasProviderWaited = false;
                                     lock.unlock();
                                 }
                             }
-
                         }else { //如消费的数量达到了生产的数量，则让当前线程等待
                             if (finished){ //消费完所有数据，则退出
                                 return;
@@ -253,8 +246,6 @@ public class Solution {
         }
     }
 
-
-
     /**
      * 启动生产者
      */
@@ -266,12 +257,11 @@ public class Solution {
                 public void run() {
                     while (true) {
                         if (index == -1){
-                            //生产者生产数据索引
+                            //生产者生产数据索引, warn
                             index = PRODUCE_BUFFER_COUNT.getAndIncrement();
                         }
-
                         long count = CONSUME_STEPS.get() * STEP_SIZE;
-                        if (index - count / BUFFER_COUNT >= BUFFER_COUNT){
+                        if (index - count / BUFFER_COUNT >= BUFFER_COUNT || BUFFER_FLAG[(int)(index%BUFFER_COUNT)]){
                             lock.lock();
                             try {
                                 hasProviderWaited = true;
@@ -282,7 +272,6 @@ public class Solution {
                                 lock.unlock();
                             }
                         }else {
-
                             String[] data = getDataFromAnyway();
                             //如果全部数据处理完了，则退出
                             if (data == null || data.length == 0){
@@ -290,23 +279,19 @@ public class Solution {
                                 finished = true;
                                 return;
                             }
-
                             int temp = (int)(index % BUFFER_COUNT);
                             BUFFER[temp] = data;
                             BUFFER_FLAG[temp] = true;
-
                             index = -1;
-
                             if (hasConsumerWaited){
                                 lock.lock();
                                 try {
                                     hasConsumerWaited = false;
-                                    empty.notifyAll();
+                                    empty.signalAll();
                                 }finally {
                                     lock.unlock();
                                 }
                             }
-
                         }
                     }
                 }
@@ -321,8 +306,9 @@ public class Solution {
      * 插入字符串
      * @param str 书名
      */
+    private final AtomicLong a = new AtomicLong(1);
     private void addString(String str){
-        System.out.println(1);
+        System.out.println(a.getAndIncrement());
         if (str == null || str.trim().length() == 0){
             return;
         }
@@ -343,8 +329,13 @@ public class Solution {
      * 获取数据
      * @return data
      */
+    private final AtomicLong atomicLong = new AtomicLong(0);
     private String[] getDataFromAnyway(){
-        System.out.println(2);
+        long i =  atomicLong.incrementAndGet();
+        if (i > 100){
+            return null;
+        }
+        System.out.println("getDataFromAnyway" + i);
         return new String[SIZE_PER_BUFFER];
     }
 
