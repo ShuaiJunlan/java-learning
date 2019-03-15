@@ -3,6 +3,7 @@ package cn.shuaijunlan.alibaba;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.LongAdder;
 import java.util.concurrent.locks.Condition;
@@ -17,6 +18,17 @@ import java.util.concurrent.locks.ReentrantLock;
  * 3. 防止并发问题
  *
  * //解题思路：
+ * 1，将1000亿个书名，分块读取，每一块对应程序中的一个buffer，在程序中分配了BUFFER_COUNT个BUFFER
+ * 2，基于生产者-消费者模型，当有buffer空闲时，生产者线程向buffer中读入一个块的数据
+ * 3，当buffer被填充了数据时，则消费者线程进行消费，每次消费的数据块大小为STEP_SIZES
+ * 4，基于ConcurrentHashMap构建（单词->出现次数）的统计信息
+ * 5，提供了如下API：
+ *      {@link Solution#startUp()}              整个流程的启动入口
+ *      {@link Solution#getWordCount(String)}   获取某个单词数显的次数
+ *      {@link Solution#getCurrentWordsCount()} 获取当前所有单词统计情况
+ *      {@link Solution#getHandledAmount()}     获取已经被统计的书的总数
+ *      {@link Solution#getDataFromAnyway()}    通过重写该函数，可以定义任意的数据源
+ *
  *
  */
 public class Solution {
@@ -37,20 +49,33 @@ public class Solution {
     private final String[][] BUFFER = new String[BUFFER_COUNT][SIZE_PER_BUFFER];
 
     /**
-     * 标记buffer是否加载成功
+     * 标记BUFFER是否加载成功
      */
-    private final  boolean[] BUFFER_FLAG = new boolean[BUFFER_COUNT];
+    private final  AtomicBoolean[] BUFFER_FLAG = new AtomicBoolean[BUFFER_COUNT];
 
     /**
-     * 存储所有单词统计数据
+     * 构造函数
+     */
+    public Solution(){
+        for (int i = 0; i < BUFFER_COUNT; i++){
+            BUFFER_FLAG[i] = new AtomicBoolean(false);
+        }
+    }
+
+    /**
+     * 存储所有单词统计数据,key为单词，value为出现的次数
      */
     private Map<String, LongAdder> statistics = new ConcurrentHashMap<>(128);
 
 
-    /////////////////////////////////核心API/////////////////////////////////
+    /////////////////////////////////核心API-start/////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
 
     /**
      * 整个流程的启动入口
+     * @see #startProvider()
+     * @see #startConsumer()
+     * @see #join()
      */
     public void startUp() {
         //启动生产者
@@ -73,6 +98,8 @@ public class Solution {
 
     /**
      * 查询某单词的出现的次数
+     * @param word 单词
+     * @return 出现的次数
      */
     public long getWordCount(String word){
         if (word == null || word.trim().length() == 0){
@@ -90,17 +117,18 @@ public class Solution {
     }
 
     /////////////////////////////////核心API-end/////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
 
     /**
      * 核心线程数，默认为处理器的核数量
      */
-    private int corePoolSize = Runtime.getRuntime().availableProcessors();
+    private int consumerCorePoolSize = Runtime.getRuntime().availableProcessors();
 
     /**
      * 消费者线程池
      */
-    private final ThreadPoolExecutor CONSUMER_THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(corePoolSize,
-            corePoolSize, 0, TimeUnit.MICROSECONDS, new SynchronousQueue<>(), new ThreadFactory() {
+    private final ThreadPoolExecutor CONSUMER_THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(consumerCorePoolSize,
+            consumerCorePoolSize, 0, TimeUnit.MICROSECONDS, new SynchronousQueue<>(), new ThreadFactory() {
 
         private final String PREFIX_NAME = "CONSUMER_THREAD_";
         private int count = 0;
@@ -118,10 +146,15 @@ public class Solution {
     });
 
     /**
+     * 核心线程数，默认为处理器的核数量
+     */
+    private int providerCorePoolSize = 2;
+
+    /**
      * 生产者线程池
      */
-    private final ThreadPoolExecutor PROVIDER_THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(BUFFER_COUNT,
-            BUFFER_COUNT, 0, TimeUnit.MICROSECONDS, new SynchronousQueue<>(), new ThreadFactory() {
+    private final ThreadPoolExecutor PROVIDER_THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(providerCorePoolSize,
+            providerCorePoolSize, 0, TimeUnit.MICROSECONDS, new SynchronousQueue<>(), new ThreadFactory() {
 
         private final String PREFIX_NAME = "PROVIDER_THREAD_";
         private int count = 0;
@@ -138,7 +171,9 @@ public class Solution {
         }
     });
 
-
+    /**
+     * 基于{@link ReentrantLock}和{@link Condition}实现等待通知
+     */
     private Lock lock = new ReentrantLock();
     private Condition full = lock.newCondition();
     private Condition empty = lock.newCondition();
@@ -167,8 +202,7 @@ public class Solution {
     /**
      * 每个消费的步长
      */
-    private final int STEP_SIZE = SIZE_PER_BUFFER >> 6;
-    // private final int STEP_SIZE = SIZE_PER_BUFFER;
+    private final int STEP_SIZE = SIZE_PER_BUFFER >> 4;
 
     /**
      * 生产buffer的计数器
@@ -179,7 +213,7 @@ public class Solution {
      * 启动消费者
      */
     private void startConsumer(){
-        for (int i = 0; i < corePoolSize; i++){
+        for (int i = 0; i < consumerCorePoolSize; i++){
             Runnable task = new Runnable() {
                 //当前要消费数据的起始指针
                 private long start = 0;
@@ -199,29 +233,32 @@ public class Solution {
                         start = currentStep * STEP_SIZE;
                         //被消费的buffer[]的index
                         int index = (int)((start / SIZE_PER_BUFFER) % BUFFER_COUNT);
-                        if (start < PRODUCE_BUFFER_COUNT.get() * SIZE_PER_BUFFER && BUFFER_FLAG[index]){
+                        if (start < PRODUCE_BUFFER_COUNT.get() * SIZE_PER_BUFFER && BUFFER_FLAG[index].get()){
                             //算出终点的位置
                             end = start + STEP_SIZE - 1;
                             end %= SIZE_PER_BUFFER;
                             //算出起始位置
                             start %= SIZE_PER_BUFFER;
+
                             //遍历字符串
                             for (int i = (int) start; i <= end; i++){
-                                //插入书名
+                                //插入书
                                 addString(BUFFER[index][i]);
                             }
                             currentStep = -1;
+
                             //消费完一个buffer，则标记为false
                             if (end == SIZE_PER_BUFFER - 1){
-                                BUFFER_FLAG[index] = false;
+                                BUFFER_FLAG[index].set(false);
                             }
+
                             //如果有生产者等待，则通知消费者
                             if (hasProviderWaited){
                                 lock.lock();
                                 try {
+                                    hasProviderWaited = false;
                                     full.signalAll();
                                 }finally {
-                                    hasProviderWaited = false;
                                     lock.unlock();
                                 }
                             }
@@ -250,7 +287,7 @@ public class Solution {
      * 启动生产者
      */
     private void startProvider(){
-        for (int i = 0; i < BUFFER_COUNT ; i++) {
+        for (int i = 0; i < providerCorePoolSize ; i++) {
             Runnable task = new Runnable() {
                 private long index = -1;
                 @Override
@@ -261,7 +298,8 @@ public class Solution {
                             index = PRODUCE_BUFFER_COUNT.getAndIncrement();
                         }
                         long count = CONSUME_STEPS.get() * STEP_SIZE;
-                        if (index - count / BUFFER_COUNT >= BUFFER_COUNT || BUFFER_FLAG[(int)(index%BUFFER_COUNT)]){
+                        //如果BUFFER中的数据已经被填满，则生产者进行等待
+                        if (index - count / BUFFER_COUNT >= BUFFER_COUNT || BUFFER_FLAG[(int)(index%BUFFER_COUNT)].get()){
                             lock.lock();
                             try {
                                 hasProviderWaited = true;
@@ -281,8 +319,12 @@ public class Solution {
                             }
                             int temp = (int)(index % BUFFER_COUNT);
                             BUFFER[temp] = data;
-                            BUFFER_FLAG[temp] = true;
+
+                            //设置当前buffer为可消费
+                            BUFFER_FLAG[temp].set(true);
+
                             index = -1;
+                            //有消费者线程等待，则通知消费者线程
                             if (hasConsumerWaited){
                                 lock.lock();
                                 try {
@@ -303,39 +345,51 @@ public class Solution {
     private static final Object LOCK = new Object();
 
     /**
+     * testing
+     */
+    private final AtomicLong a = new AtomicLong(1);
+    /**
      * 插入字符串
      * @param str 书名
      */
-    private final AtomicLong a = new AtomicLong(1);
     private void addString(String str){
-        System.out.println(a.getAndIncrement());
+
+        System.out.println("addString: " + a.getAndIncrement());
         if (str == null || str.trim().length() == 0){
             return;
         }
+        //将字符串按照空格分割
         String[] strings = str.split(" ");
+
+        String t;
         for (String s : strings){
-            if (statistics.get(s) == null){
+            t = s.trim();
+            if (t.length() == 0){
+                continue;
+            }
+            //DCL
+            if (statistics.get(t) == null){
                 synchronized (LOCK){
-                    if (statistics.get(s) == null){
-                        statistics.put(s, new LongAdder());
+                    if (statistics.get(t) == null){
+                        statistics.put(t, new LongAdder());
                     }
                 }
             }
-            statistics.get(s).increment();
+            statistics.get(t).increment();
         }
     }
 
-    /**
-     * 获取数据
-     * @return data
-     */
     private final AtomicLong atomicLong = new AtomicLong(0);
-    private String[] getDataFromAnyway(){
+
+    /**
+     * 获取数据的接口，可通过重写该方法实现自定义数据源
+     * @return data 返回值如果为null或者length为0，则表示已获取完所有数据
+     */
+    protected String[] getDataFromAnyway(){
         long i =  atomicLong.incrementAndGet();
-        if (i > 100){
+        if (i > 50){
             return null;
         }
-        System.out.println("getDataFromAnyway" + i);
         return new String[SIZE_PER_BUFFER];
     }
 

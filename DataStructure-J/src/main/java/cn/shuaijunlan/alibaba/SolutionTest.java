@@ -9,9 +9,6 @@ public class SolutionTest {
         long start = System.currentTimeMillis();
         Solution solution = new Solution();
         solution.startUp();
-        System.out.println(System.currentTimeMillis() - start);
-
-        //17018 1:4
-
+        System.out.println("Spending time: " + (System.currentTimeMillis() - start) + "ms");
     }
 }
