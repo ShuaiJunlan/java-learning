@@ -2,6 +2,8 @@ package cn.shuaijunlan.java.basic.learning.unsafe;
 
 import sun.misc.Unsafe;
 
+import java.lang.reflect.Field;
+
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
  * @since Created in 2:51 PM 3/15/19.
@@ -9,7 +11,19 @@ import sun.misc.Unsafe;
 public class ObjectInHeap {
     private long address = 0;
 
-    private Unsafe unsafe = UnsafeTest.getUnsafe();
+    public static Unsafe getUnsafe() {
+
+        Field unsafeField = Unsafe.class.getDeclaredFields()[0];
+        unsafeField.setAccessible(true);
+        try {
+            return (Unsafe) unsafeField.get(null);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private Unsafe unsafe = getUnsafe();
 
     public ObjectInHeap()
     {
