@@ -27,11 +27,10 @@ import java.util.concurrent.locks.ReentrantLock;
  * 4，基于ConcurrentHashMap构建（单词->出现次数）的统计信息
  * 5，提供了如下API：
  *      {@link Solution#startUp()}              整个流程的启动入口
- *      {@link Solution#getWordCount(String)}   获取某个单词数显的次数
+ *      {@link Solution#getWordCount(String)}   获取某个单词出现的次数
  *      {@link Solution#getCurrentWordsCount()} 获取当前所有单词统计情况
  *      {@link Solution#getHandledAmount()}     获取已经被统计的书的总数
  *      {@link Solution#getDataFromAnyway()}    通过重写该函数，可以定义任意的数据源
- *
  *
  */
 public class Solution {
@@ -345,7 +344,7 @@ public class Solution {
         }
     }
 
-    private static final Object LOCK = new Object();
+    private final Object LOCK = new Object();
 
     /**
      * testing
