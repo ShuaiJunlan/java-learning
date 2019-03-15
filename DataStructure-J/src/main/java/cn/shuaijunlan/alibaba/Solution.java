@@ -120,7 +120,7 @@ public class Solution {
     ////////////////////////////////////////////////////////////////////////////
 
     /**
-     * 核心线程数，默认为处理器的核数量
+     * 核心线程数，默认为处理器的核数
      */
     private int consumerCorePoolSize = Runtime.getRuntime().availableProcessors();
 
@@ -146,7 +146,7 @@ public class Solution {
     });
 
     /**
-     * 核心线程数，默认为处理器的核数量
+     * 消费者线池核心线程数
      */
     private int providerCorePoolSize = 2;
 
