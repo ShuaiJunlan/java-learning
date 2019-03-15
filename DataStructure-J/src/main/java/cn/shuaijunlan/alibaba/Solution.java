@@ -24,7 +24,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 1，将1000亿个书名，分块读取，每一块对应程序中的一个buffer，在程序中分配了BUFFER_COUNT个BUFFER
  * 2，基于生产者-消费者模型，当有buffer空闲时，生产者线程向buffer中读入一个块的数据
  * 3，当buffer被填充了数据时，则消费者线程进行消费，每次消费的数据块大小为STEP_SIZES
- * 4，基于ConcurrentHashMap构建（单词->出现次数）的统计信息
+ * 4，基于{@link ConcurrentHashMap}构建（单词->出现次数）的统计信息
  * 5，提供了如下API：
  *      {@link Solution#startUp()}              整个流程的启动入口
  *      {@link Solution#getWordCount(String)}   获取某个单词出现的次数
