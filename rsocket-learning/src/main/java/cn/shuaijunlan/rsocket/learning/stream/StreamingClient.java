@@ -42,6 +42,7 @@ public class StreamingClient {
                 .doFinally(signalType -> socket.dispose())
                 .then()
                 .block();
+
     }
 
     private static class SocketAcceptorImpl implements SocketAcceptor {
