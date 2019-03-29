@@ -32,6 +32,7 @@
         <module>jmh-learning</module>
         <module>cglib-learning</module>
         <module>rsocket-learning</module>
+        <module>akka-learning</module>
     </modules>
     <build>
         <finalName>java-basic</finalName>
