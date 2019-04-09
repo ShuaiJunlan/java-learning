@@ -44,7 +44,7 @@ public class ExecuteServiceTest {
             @Override
             public void run() {
                 try {
-                    TimeUnit.SECONDS.sleep(20);
+                    TimeUnit.SECONDS.sleep(10);
                     System.out.println(11);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -56,7 +56,7 @@ public class ExecuteServiceTest {
         }
 
         try {
-            TimeUnit.SECONDS.sleep(233);
+            TimeUnit.SECONDS.sleep(10);
             thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
