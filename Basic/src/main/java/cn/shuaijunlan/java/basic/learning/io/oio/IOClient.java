@@ -23,11 +23,12 @@ public class IOClient {
                     try {
                         socket.getOutputStream().write((new Date() + " :hello world!").getBytes());
                         Thread.sleep(0);
-                        byte[] reads = new byte[1024];
-                        int re = socket.getInputStream().read(reads);
-                        if (re > 0){
-                            System.out.println("Received: " + new String(reads, 0, re, StandardCharsets.UTF_8));
-                        }
+                        // byte[] reads = new byte[1024];
+                        // int re = socket.getInputStream().read(reads);
+                        // if (re > 0){
+                        //     System.out.println("Received: " + new String(reads, 0, re, StandardCharsets.UTF_8));
+                        // }
+                        System.out.println(i);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
