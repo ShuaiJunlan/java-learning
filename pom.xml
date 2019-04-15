@@ -34,6 +34,7 @@
         <module>rsocket-learning</module>
         <module>akka-learning</module>
         <module>jna-learning</module>
+        <module>reactor-programming</module>
     </modules>
     <build>
         <finalName>java-basic</finalName>
