@@ -42,6 +42,12 @@
             <version>1.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.smacke</groupId>
+            <artifactId>jaydio</artifactId>
+            <version>0.1</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>Basic-J</finalName>

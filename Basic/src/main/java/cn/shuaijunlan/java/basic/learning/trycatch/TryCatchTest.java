@@ -26,6 +26,28 @@ public class TryCatchTest {
         }finally {
             System.out.println(2);
         }
+        //case 1
+        try {
+            System.out.println("try");
+        }catch (Exception e){
+            System.out.println("catch");
+        }finally {
+            System.out.println("finally");
+        }
+
+        //case 2
+        try {
+            System.out.println("try");
+        }finally {
+            System.out.println("finally");
+        }
+
+        //case 3
+        try {
+            System.out.println("try");
+        }catch (Exception e){
+            System.out.println("catch");
+        }
 
     }
 

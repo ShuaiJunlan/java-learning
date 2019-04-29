@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 public class IOServer {
     public static void main(String[] args) {
         try {
-            final ServerSocket serverSocket = new ServerSocket(8000);
+            final ServerSocket serverSocket = new ServerSocket(8008);
             ExecutorService executor = Executors.newCachedThreadPool();
             executor.execute(() -> {
                 while (true){
@@ -28,10 +28,14 @@ public class IOServer {
                                 InputStream inputStream =socket.getInputStream();
 
                                 while ((len = inputStream.read(data)) != -1){
+
                                     System.out.println(new String(data, 0, len));
                                 }
+                                System.out.println(len);
                             } catch (IOException e) {
                                 e.printStackTrace();
+                            }finally {
+                                // socket
                             }
 
                         }).start();

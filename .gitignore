@@ -28,3 +28,5 @@ mvnw
 mvnw.cmd
 
 *.test
+*.txt
+*.bin

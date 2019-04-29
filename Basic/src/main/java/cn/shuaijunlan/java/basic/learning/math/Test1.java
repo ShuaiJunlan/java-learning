@@ -53,4 +53,9 @@ public class Test1 {
         Object key = new Object();
         System.out.println((h = key.hashCode()) ^ (h >>> 16));
     }
+
+    @Test
+    public void test6(){
+        System.out.println(Math.round(1.5));
+    }
 }

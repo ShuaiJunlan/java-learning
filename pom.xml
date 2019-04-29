@@ -31,6 +31,10 @@
         <module>javassist-learning</module>
         <module>jmh-learning</module>
         <module>cglib-learning</module>
+        <module>rsocket-learning</module>
+        <module>akka-learning</module>
+        <module>jna-learning</module>
+        <module>reactor-programming</module>
     </modules>
     <build>
         <finalName>java-basic</finalName>
