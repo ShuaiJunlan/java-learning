@@ -39,4 +39,15 @@ public class Ipv6Test {
         }
 
     }
+
+    @Test
+    public void test3() throws UnknownHostException {
+        System.setProperty("java.net.preferIPv6Addresses", "true");
+        System.out.println(InetAddress.getByName("www.google.com"));
+        System.out.println(InetAddress.getByName("www.google.com"));
+        System.setProperty("java.net.preferIPv6Addresses", "true");
+        System.out.println(InetAddress.getByName("www.hust.edu.cn"));
+        System.out.println(InetAddress.getByName("0x1996.org"));
+        System.out.println(InetAddress.getByName("www.baidu.com"));
+    }
 }

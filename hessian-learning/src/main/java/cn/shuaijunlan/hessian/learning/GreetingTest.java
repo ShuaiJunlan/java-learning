@@ -13,9 +13,9 @@ public class GreetingTest {
         // String url = "http://hessian.caucho.com/test/test";
         //The implement service in testmarkdown module, you can look into.
 
-        String url = "http://localhost:8083/mark/test";
+        String url = "http://localhost:8080/hello";
         HessianProxyFactory factory = new HessianProxyFactory();
         BasicAPI basicAPI = (BasicAPI) factory.create(BasicAPI.class, url);
-        System.out.println("hello():" + basicAPI.hello());
+        System.out.println("hello():" + basicAPI.hello("Junlan"));
     }
 }
