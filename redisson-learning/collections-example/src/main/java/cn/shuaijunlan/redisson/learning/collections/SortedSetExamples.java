@@ -3,6 +3,8 @@ package cn.shuaijunlan.redisson.learning.collections;
 import org.redisson.Redisson;
 import org.redisson.api.RSortedSet;
 import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
+import org.redisson.config.TransportMode;
 
 import java.util.Arrays;
 
@@ -13,7 +15,13 @@ import java.util.Arrays;
 public class SortedSetExamples {
     public static void main(String[] args) {
         // connects to 127.0.0.1:6379 by default
-        RedissonClient redisson = Redisson.create();
+        Config config = new Config();
+        config.setTransportMode(TransportMode.EPOLL);
+
+        config.useSingleServer()
+                .setAddress("redis://200.100.100.00:6379");
+
+        RedissonClient redisson = Redisson.create(config);
 
         RSortedSet<String> sortedSet = redisson.getSortedSet("mySortedSet");
         sortedSet.add("1");
