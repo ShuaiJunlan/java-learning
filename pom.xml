@@ -35,6 +35,8 @@
         <module>akka-learning</module>
         <module>jna-learning</module>
         <module>reactor-programming</module>
+        <module>vertx-learning</module>
+        <module>redisson-learning</module>
     </modules>
     <build>
         <finalName>java-basic</finalName>

@@ -7,14 +7,14 @@ import com.caucho.hessian.server.HessianServlet;
  * @since Created in 2:18 PM 11/3/18.
  */
 public class BasicService extends HessianServlet implements  BasicAPI {
-    private String _greeting = "Hello, world";
+    private String _greeting = "Hello, ";
 
     public void setGreeting(String greeting){
         this._greeting = greeting;
     }
 
     @Override
-    public String hello() {
-        return _greeting;
+    public String hello(String str) {
+        return _greeting + str;
     }
 }
