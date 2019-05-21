@@ -37,6 +37,7 @@
         <module>reactor-programming</module>
         <module>vertx-learning</module>
         <module>redisson-learning</module>
+        <module>disruptor-learning</module>
     </modules>
     <build>
         <finalName>java-basic</finalName>
