@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 0)
 @Measurement(iterations = 1, time = 1, timeUnit = TimeUnit.MILLISECONDS)
 @Threads(1)
-@Fork(0)
+@Fork(1)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
 public class SequentialReadFileTest {
