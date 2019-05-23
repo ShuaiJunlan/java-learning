@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
  * @author Shuai Junlan[shuaijunlan@gmail.com].
  * @since Created in 8:28 PM 5/21/19.
  */
-public class LongEventMain {
+public class OneConsumerOneProviderNotRepeated {
     public static void main(String[] args) throws InterruptedException {
         LongEventFactory factory = new LongEventFactory();
 
@@ -31,10 +31,8 @@ public class LongEventMain {
 
         ByteBuffer bb = ByteBuffer.allocate(8);
         for (long i = 0; i < 10000; i++) {
-            bb.clear();
-            bb.putLong(i);
+            bb.putLong(0, i);
             producer.onData(bb);
-            // Thread.sleep(1000);
         }
         Thread.sleep(1000);
     }
