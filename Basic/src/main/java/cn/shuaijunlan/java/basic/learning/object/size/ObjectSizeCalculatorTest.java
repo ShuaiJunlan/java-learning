@@ -31,5 +31,6 @@ public class ObjectSizeCalculatorTest {
         System.out.println("VolatileLong: " + ObjectSizeCalculator.getObjectSize(new VolatileLong()));
         System.out.println(ObjectSizeCalculator.getObjectSize(new VolatileLongContented()));
         System.out.println(ObjectSizeCalculator.getObjectSize(new Sequence()));
+        System.out.println("SequenceDemo:" + ObjectSizeCalculator.getObjectSize(new SequenceDemo()));
     }
 }

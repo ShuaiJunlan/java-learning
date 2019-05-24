@@ -8,4 +8,9 @@ public class VolatileLong {
     volatile long p0, p1, p2, p3, p4, p5, p6;
     public volatile long value = 0;
     volatile long q0, q1, q2, q3, q4, q5, q6;
+
+    /**
+     * 静态类变量存放在什么位置？
+     */
+    private static long a1, a2;
 }

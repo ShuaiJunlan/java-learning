@@ -20,5 +20,6 @@ class RhsPadding extends Value
 }
 public class SequenceDemo extends RhsPadding{
     static final long INITIAL_VALUE = -1L;
+    private static final Object OBJECT = new Object();
     private static final long VALUE_OFFSET = 1L;
 }

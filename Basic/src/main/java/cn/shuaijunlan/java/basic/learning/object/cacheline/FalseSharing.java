@@ -9,6 +9,12 @@ package cn.shuaijunlan.java.basic.learning.object.cacheline;
  *
  * https://www.cnblogs.com/cyfonly/p/5800758.html
  *
+ * 对象内存布局：https://www.jianshu.com/p/91e398d5d17c
+ *
+ * What false sharing is and how JVM prevents it: https://medium.com/@rukavitsya/what-is-false-sharing-and-how-jvm-prevents-it-82a4ed27da84
+ *
+ * Why java's Exchanger.Slot cache line padding like this?: https://stackoverflow.com/questions/35605860/why-javas-exchanger-slot-cache-line-padding-like-this
+ *
  */
 public class FalseSharing implements Runnable {
 
@@ -78,11 +84,15 @@ public class FalseSharing implements Runnable {
 
     // long padding避免false sharing
     // 按理说jdk7以后long padding应该被优化掉了，但是从测试结果看padding仍然起作用
+
+    /**
+     * 避免false sharing，要保证两个对象的value不能在同一个cache line里面，因此在value之前，至少需要添加5个long变量进行填充
+     */
     public final static class VolatileLong2 extends Long {
-        volatile long p0, p1, p2, p3, p4, p5, p6;
-        // volatile long p0, p1, p3;
+        // volatile long p0, p1, p2, p3, p4, p5, p6;
+        volatile long p0, p1, p3, p4, p5;
         public volatile long value = 0L;
-        volatile long q0, q1, q2, q3, q4, q5, q6;
+        // volatile long q0, q1, q2, q3, q4, q5, q6;
     }
 
     /**
