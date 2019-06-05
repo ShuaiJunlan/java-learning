@@ -8,7 +8,16 @@
     <name>Basic-J Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
-
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+        </dependency>
     </dependencies>
     <modules>
         <module>Basic</module>
@@ -38,6 +47,8 @@
         <module>vertx-learning</module>
         <module>redisson-learning</module>
         <module>disruptor-learning</module>
+        <module>guava-learning</module>
+        <module>arthas-learning</module>
     </modules>
     <build>
         <finalName>java-basic</finalName>

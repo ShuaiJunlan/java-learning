@@ -92,7 +92,7 @@ public class FalseSharing implements Runnable {
         volatile long p0, p1, p2, p3, p4, p5, p6;
         // volatile long p0, p1, p3, p4, p5;
         public volatile long value = 0L;
-        // volatile long q0, q1, q2, q3, q4, q5, q6;
+        volatile long q0, q1, q2, q3, q4, q5, q6;
     }
 
     /**
