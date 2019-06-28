@@ -91,7 +91,7 @@ public class CompletableFutureDemo {
                             f.complete(1);
                         }
                     }
-                }).start();
+                }, "ttt").start();
 
                 f.whenComplete(new BiConsumer<Integer, Throwable>() {
                     @Override
@@ -105,6 +105,7 @@ public class CompletableFutureDemo {
                 });
             }
         });
+        thread.setName("hello");
         thread.start();
 
         Thread.sleep(3000);
