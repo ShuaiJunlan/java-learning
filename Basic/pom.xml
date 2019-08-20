@@ -60,6 +60,12 @@
             <version>1.21</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>Basic-J</finalName>

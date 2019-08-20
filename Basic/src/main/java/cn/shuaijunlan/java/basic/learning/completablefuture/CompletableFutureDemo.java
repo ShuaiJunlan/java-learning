@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.function.BiConsumer;
 
 /**
  * @author Junlan Shuai[shuaijunlan@gmail.com].
@@ -30,7 +31,7 @@ public class CompletableFutureDemo {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(30000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }finally {
@@ -38,7 +39,20 @@ public class CompletableFutureDemo {
                 }
             }
         }).start();
-        System.out.println(f.get());
+
+        f.whenComplete(new BiConsumer<Integer, Throwable>() {
+            @Override
+            public void accept(Integer integer, Throwable throwable) {
+                if (throwable == null){
+                    System.out.println(integer);
+                }else {
+                    throwable.getMessage();
+                }
+            }
+        });
+        System.out.println("hhh");
+        Thread.sleep(6000);
+        // System.out.println(f.get());
     }
     @Test
     public void test3() throws ExecutionException, InterruptedException {
@@ -58,7 +72,52 @@ public class CompletableFutureDemo {
         }).start();
         System.out.println(f.get());
     }
-    public static CompletableFuture<Integer> compute() {
+
+    @Test
+    public void test4() throws ExecutionException, InterruptedException {
+        CompletableFuture<Integer> f = compute();
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }finally {
+                            f.complete(1);
+                        }
+                    }
+                }, "ttt").start();
+
+                f.whenComplete(new BiConsumer<Integer, Throwable>() {
+                    @Override
+                    public void accept(Integer integer, Throwable throwable) {
+                        if (throwable == null){
+                            System.out.println(integer);
+                        }else {
+                            throwable.getMessage();
+                        }
+                    }
+                });
+            }
+        });
+        thread.setName("hello");
+        thread.start();
+
+        Thread.sleep(3000);
+
+        thread.interrupt();
+        // thread.destroy();
+
+        Thread.sleep(10000);
+        // System.out.println(f.get());
+    }
+
+    private static CompletableFuture<Integer> compute() {
         final CompletableFuture<Integer> future = new CompletableFuture<>();
         return future;
     }
