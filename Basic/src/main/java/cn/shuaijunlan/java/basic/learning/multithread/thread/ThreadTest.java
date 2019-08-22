@@ -17,4 +17,21 @@ public class ThreadTest {
         Thread.sleep(0);
         System.out.println("what is the meaning");
     }
+
+    @Test
+    public void test3() throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(3000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("hello");
+        });
+        thread.start();
+        // java.lang.IllegalThreadStateException
+        // thread.start();
+        thread.join();
+    }
+
 }

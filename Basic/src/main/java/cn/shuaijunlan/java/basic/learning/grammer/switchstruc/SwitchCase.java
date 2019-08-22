@@ -21,4 +21,14 @@ public class SwitchCase {
         //         break;
         // }
     }
+
+    public void test2(){
+        String a = "100";
+        // todo: required char byte short int Character Byte Short Integer String or Enum
+        switch (a){
+            case "100":
+                System.out.println(1);
+                break;
+        }
+    }
 }
