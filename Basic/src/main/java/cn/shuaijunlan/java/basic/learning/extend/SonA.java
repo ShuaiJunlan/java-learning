@@ -1,10 +1,15 @@
 package cn.shuaijunlan.java.basic.learning.extend;
 
+import org.junit.Test;
+
 /**
  * @author Junlan Shuai[shuaijunlan@gmail.com].
  * @since Created in 9:07 AM 10/29/18.
  */
 public class SonA extends Parent {
+    public SonA(){
+        System.out.println("SonA");
+    }
     private String name;
 
     public SonA(String name) {
@@ -23,15 +28,19 @@ public class SonA extends Parent {
      * @param args
      */
     public static void main(String[] args) {
-        Parent parent = new Parent("p");
-        parent.printName();
-        parent.printStatic();
-        Parent.printStatic();
+        SonA sonA = new SonA();
 
-        SonA sonA = new SonA("s");
-        sonA.printName();
 
-        Parent son = new SonA("ss");
-        son.printName();
+//        Parent parent = new Parent("p");
+//        parent.printName();
+//        parent.printStatic();
+//        Parent.printStatic();
+//
+//        SonA sonA = new SonA("s");
+//        sonA.printName();
+//
+//        Parent son = new SonA("ss");
+//        son.printName();
     }
+
 }
