@@ -5,6 +5,9 @@ package cn.shuaijunlan.java.basic.learning.extend;
  * @since Created in 9:06 AM 10/29/18.
  */
 public class Parent {
+    public Parent(){
+        System.out.println("Parent");
+    }
     private String name;
     public Parent(String name){
         this.name = name;
