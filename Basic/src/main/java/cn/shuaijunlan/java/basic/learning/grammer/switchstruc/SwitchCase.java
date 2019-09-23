@@ -29,6 +29,8 @@ public class SwitchCase {
             case "100":
                 System.out.println(1);
                 break;
+            default:
+                break;
         }
     }
 }
