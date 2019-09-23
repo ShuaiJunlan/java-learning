@@ -28,4 +28,9 @@ public class IntegerTest {
         System.out.println(g == (a+b));
         System.out.println(g.equals(a+b));
     }
+
+    @Test
+    public void test2(){
+        System.out.println(Integer.MAX_VALUE + Integer.MAX_VALUE);
+    }
 }

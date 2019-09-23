@@ -45,4 +45,11 @@ public class StringMain {
         System.out.println( s2==s1.intern() );
     }
 
+    @Test
+    public void test4(){
+        String s1 = "aa";
+        String s2 = "aa";
+        System.out.println(s1 == s2);
+    }
+
 }
