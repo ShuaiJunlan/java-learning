@@ -14,6 +14,7 @@
     <modules>
         <module>fst-serialization</module>
         <module>kryo-serialization</module>
+        <module>jprotobuf-serialization</module>
     </modules>
 
     <properties>
@@ -23,23 +24,37 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--fst-->
             <dependency>
                 <groupId>de.ruedigermoeller</groupId>
                 <artifactId>fst</artifactId>
                 <version>${fst.version}</version>
             </dependency>
+            <!--fst end-->
+            <!--kyro-->
             <dependency>
                 <groupId>com.esotericsoftware</groupId>
                 <artifactId>kryo</artifactId>
                 <version>${kryo.version}</version>
             </dependency>
+            <!--kyro end-->
+
             <!--pojo object-->
             <dependency>
                 <groupId>cn.shuaijunlan</groupId>
                 <artifactId>netty</artifactId>
                 <version>${parent.version}</version>
             </dependency>
+
+            <!--jprotobuf -->
+            <dependency>
+                <groupId>com.baidu</groupId>
+                <artifactId>jprotobuf</artifactId>
+                <version>2.2.15</version>
+            </dependency>
+            <!--jprotobuf end-->
         </dependencies>
+
     </dependencyManagement>
 
 
