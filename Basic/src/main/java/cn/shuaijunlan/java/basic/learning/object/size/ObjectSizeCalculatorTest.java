@@ -1,10 +1,10 @@
 package cn.shuaijunlan.java.basic.learning.object.size;
 
 import com.lmax.disruptor.Sequence;
-import com.sun.jmx.snmp.Timestamp;
 import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
 import org.junit.Test;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
