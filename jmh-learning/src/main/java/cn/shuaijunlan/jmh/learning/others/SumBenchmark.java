@@ -1,4 +1,4 @@
-package cn.shuaijunlan.jmh.learning;
+package cn.shuaijunlan.jmh.learning.others;
 
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.results.RunResult;

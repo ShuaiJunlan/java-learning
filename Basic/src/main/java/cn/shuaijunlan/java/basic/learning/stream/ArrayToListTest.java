@@ -3,17 +3,15 @@ package cn.shuaijunlan.java.basic.learning.stream;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
  * @since Created in 8:30 AM 9/18/19.
  */
-public class ArrayToList {
+public class ArrayToListTest {
     @Test
     public void test1(){
         int[] test1 = new int[]{1,2,3,4};

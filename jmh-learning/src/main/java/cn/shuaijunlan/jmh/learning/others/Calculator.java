@@ -1,4 +1,4 @@
-package cn.shuaijunlan.jmh.learning;
+package cn.shuaijunlan.jmh.learning.others;
 
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
