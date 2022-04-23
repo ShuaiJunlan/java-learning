@@ -10,7 +10,7 @@
     <properties>
         <commons-lang.version>2.6</commons-lang.version>
         <slf4j.version>1.7.2</slf4j.version>
-        <spring.version>4.3.2.RELEASE</spring.version>
+        <spring.version>5.3.19</spring.version>
         <!-- jackson的版本2.3.1与2.7.1有什么差别 -->
         <jackson.version>2.10.0.pr1</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
